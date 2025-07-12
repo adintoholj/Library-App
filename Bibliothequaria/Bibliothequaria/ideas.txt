@@ -1,0 +1,14 @@
+﻿features: 
+1. adding a new library member 
+2. adding a new employee (optional if i add the admin role)
+3. adding a new book
+4. seeing who borrowed the book, and who lent the book 
+5. list out books by status, which ones are currently taken and which ones are currently available
+6. search the books by author, genre, etc.
+
+CRUD OPERATIONS: create - books and members, possibly new employees 
+                 update - existing items' statuses
+                 
+books will have a status 
+if a book has an inactive status it cannot be borrowed nor lent
+if a member has an inactive status, they cannot borrow the books 
