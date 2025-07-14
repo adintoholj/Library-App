@@ -60,7 +60,7 @@ public partial class BibliothequariaContext : DbContext
 
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.EMail)
-                .HasMaxLength(1)
+                .HasMaxLength(100)
                 .HasColumnName("E-mail");
             entity.Property(e => e.Ime).HasMaxLength(50);
             entity.Property(e => e.Prezime).HasMaxLength(50);
