@@ -11,7 +11,7 @@ public partial class Radnik
 
     public string Prezime { get; set; } = null!;
 
-    public string Telefon { get; set; }
+    public string Telefon { get; set; } = null!;
 
     public string EMail { get; set; } = null!;
 

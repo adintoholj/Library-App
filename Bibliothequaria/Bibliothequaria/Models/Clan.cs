@@ -13,5 +13,7 @@ public partial class Clan
 
     public DateOnly DatumUclane { get; set; }
 
+    public bool? Status { get; set; }
+
     public virtual ICollection<Transakcija> Transakcijas { get; set; } = new List<Transakcija>();
 }

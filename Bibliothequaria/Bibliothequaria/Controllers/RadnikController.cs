@@ -27,6 +27,8 @@ namespace Bibliothequaria.Controllers
             return Ok(rezultat);
         }
 
+        //new worker
+
         [HttpPost]
         public async Task<IActionResult> unesi([FromBody] RadnikCreateDTO podaci)     //za unos novog podatka
         {
@@ -37,11 +39,13 @@ namespace Bibliothequaria.Controllers
                 Telefon = podaci.Telefon,
                 EMail = podaci.EMail
             };
-
+            
             db.Add(radnik);
             await db.SaveChangesAsync();
             return Ok(radnik);
         }
+
+        //delete ZA TESTING PURPOSES, NE ZA KORISNIKA!
 
         [HttpDelete("{parametar:int}")]
         public IActionResult Obrisi(int parametar)  //za brisanje po ID
@@ -58,6 +62,27 @@ namespace Bibliothequaria.Controllers
             return Ok(parametar);
         }
 
+        //update
 
+        [HttpPost]
+
+        public async Task<IActionResult> Izmijeni([FromBody] RadnikUpdateDTO podaci) //za izmjenu
+        {
+            Radnik rezultat = db.Radniks.Where(r => r.Id == podaci.Id).FirstOrDefault();
+            //select * from  where....
+            if (rezultat == null)
+            { return NotFound($"Podatak sa Id = {podaci.Id} nije pronadjen"); }
+            else
+            {
+                rezultat.Ime = podaci.Ime;
+                rezultat.Prezime = podaci.Prezime;
+                rezultat.Telefon = podaci.Telefon;
+                rezultat.EMail = podaci.EMail;
+                db.Update(rezultat);
+                await db.SaveChangesAsync();
+            }
+            //logika je da ukucas id radnika kojem hoces da izmijenis podatke i tako mijenjas
+            return Ok(rezultat);
+        }
     }
 }

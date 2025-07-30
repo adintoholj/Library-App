@@ -64,6 +64,7 @@ public partial class BibliothequariaContext : DbContext
                 .HasColumnName("E-mail");
             entity.Property(e => e.Ime).HasMaxLength(50);
             entity.Property(e => e.Prezime).HasMaxLength(50);
+            entity.Property(e => e.Telefon).HasMaxLength(20);
         });
 
         modelBuilder.Entity<Transakcija>(entity =>
