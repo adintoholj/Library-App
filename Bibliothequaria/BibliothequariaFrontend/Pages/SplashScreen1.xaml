@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="BibliothequariaFrontend.Pages.SplashScreen1"
+    BackgroundColor="#4A4646"
+    Padding="20">
+
+    <Grid RowDefinitions="Auto,*,Auto">
+        <!-- Top-left logo -->
+        <Image Source="yellowbook.png"
+               HeightRequest="50"
+               HorizontalOptions="Start"
+               VerticalOptions="Start" />
+
+        <!-- Main content -->
+        <StackLayout Grid.Row="1"
+                     VerticalOptions="Center"
+                     HorizontalOptions="Center"
+                     Spacing="20">
+
+            <!-- Title -->
+            <Label Text="Welcome to bibliothequaria!"
+                   FontFamily="PoppinsBold"
+                   FontSize="24"
+                   TextColor="White"
+                   HorizontalOptions="Center" />
+
+            <Label Text="With bibliothequaria, you can:"
+                   FontFamily="PoppinsRegular"
+                   FontSize="16"
+                   TextColor="White"
+                   HorizontalOptions="Center" />
+
+            <!-- Icons with labels -->
+            <Grid ColumnDefinitions="*,*,*,*" ColumnSpacing="30" Margin="0,20,10,0">
+                <!-- Add new members -->
+                <StackLayout Grid.Column="0" Spacing="10" HorizontalOptions="Center">
+                    <Image Source="peopleone.webp" HeightRequest="80" WidthRequest="80" />
+                    <Label Text="Add new members"
+                           FontFamily="PoppinsRegular"
+                           FontSize="14"
+                           TextColor="White"
+                           HorizontalOptions="Center" />
+                </StackLayout>
+                <!-- Add/Delete books -->
+                <StackLayout Grid.Column="1" Spacing="10" HorizontalOptions="Center">
+                    <Image Source="blubook.webp" HeightRequest="80" WidthRequest="80" />
+                    <Label Text="Add/Delete books"
+                           FontFamily="PoppinsRegular"
+                           FontSize="14"
+                           TextColor="White"
+                           HorizontalOptions="Center" />
+                </StackLayout>
+                <!-- See who borrowed which book -->
+                <StackLayout Grid.Column="2" Spacing="10" HorizontalOptions="Center">
+                    <Image Source="userandbook.png" HeightRequest="80" WidthRequest="80" />
+                    <Label Text="See who borrowed which book"
+                           FontFamily="PoppinsRegular"
+                           FontSize="14"
+                           TextColor="White"
+                           HorizontalOptions="Center" />
+                </StackLayout>
+                <!-- List and search books -->
+                <StackLayout Grid.Column="3" Spacing="10" HorizontalOptions="Center">
+                    <Image Source="featherpen.png" HeightRequest="80" WidthRequest="80" />
+                    <Label Text="List and search&#x0a; books by&#x0a; genre, author names, etc."
+                           FontFamily="PoppinsRegular"
+                           FontSize="14"
+                           TextColor="White"
+                           HorizontalTextAlignment="Center"
+                           HorizontalOptions="Center" 
+                           LineBreakMode="WordWrap"
+                           MaxLines="3"
+                           />
+                </StackLayout>
+            </Grid>
+
+            <!-- Proceed button -->
+            <Button x:Name="ProceedButton"
+                    Text="Proceed to the application"
+                    FontFamily="PoppinsBold"
+                    TextColor="White"
+                    BackgroundColor="#665A44"
+                    CornerRadius="8"
+                    HeightRequest="50"
+                    WidthRequest="300"
+                    HorizontalOptions="Center" />
+        </StackLayout>
+
+        <!-- Footer -->
+        <Grid Grid.Row="2" ColumnDefinitions="Auto,*,Auto" Padding="0,10,0,0">
+            <!-- Logo and app name -->
+            <StackLayout Orientation="Horizontal" Spacing="5" HorizontalOptions="Start">
+                <Image Source="yellowbook.png" HeightRequest="20" WidthRequest="20" />
+                <Label Text="Bibliothequaria"
+                       FontFamily="PoppinsRegular"
+                       FontSize="12"
+                       TextColor="#787676"
+                       VerticalOptions="Center" />
+            </StackLayout>
+
+            <!-- Copyright -->
+            <Label Grid.Column="1"
+                   Text="© 2025 Bibliothequaria - All Rights Reserved"
+                   FontFamily="PoppinsRegular"
+                   FontSize="12"
+                   TextColor="#FDBF1D"
+                   HorizontalOptions="Center" />
+
+            <!-- Links -->
+            <StackLayout Grid.Column="2" Orientation="Horizontal" Spacing="10" HorizontalOptions="End">
+                <Label Text="Privacy Policy"
+                       FontFamily="PoppinsBold"
+                       FontSize="12"
+                       TextColor="#FDBF1D" />
+                <Label Text="Terms of Service"
+                       FontFamily="PoppinsBold"
+                       FontSize="12"
+                       TextColor="#FDBF1D" />
+            </StackLayout>
+        </Grid>
+    </Grid>
+</ContentPage>
