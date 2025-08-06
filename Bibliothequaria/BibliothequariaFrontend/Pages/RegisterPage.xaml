@@ -3,13 +3,14 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:BibliothequariaFrontend.Controls"
-    x:Class="BibliothequariaFrontend.Pages.MainPage"
+    x:Class="BibliothequariaFrontend.Pages.RegisterPage"
     BackgroundColor="#4A4646"
     Padding="20"
     Shell.NavBarIsVisible="False">
 
     <Grid RowDefinitions="Auto,Auto,*,Auto,Auto">
-        <!-- Row 0: Top-left logo -->
+
+        <!-- Logo (row 0) -->
         <Image
       Grid.Row="0"
       Source="yellowbook.png"
@@ -17,65 +18,93 @@
       HorizontalOptions="Start"
       VerticalOptions="Start" />
 
-        <!-- Row 1: Title -->
-        <Label
-      Grid.Row="1"
-      Text="Welcome to bibliothequaria!"
-      FontFamily="PoppinsBold"
-      FontSize="24"
-      TextColor="White"
-      HorizontalOptions="Center" />
-
-        <!-- Row 2: Buttons area -->
+        <!-- Titles (row 1) -->
         <StackLayout
-      Grid.Row="2"
+      Grid.Row="1"
       VerticalOptions="Center"
       HorizontalOptions="Center"
-      Spacing="20">
-
-            <!-- Existing employee -->
-            <StackLayout Orientation="Horizontal" Spacing="10" VerticalOptions="Center">
-                <Label
-          Text="Existing employee?"
-          FontFamily="PoppinsRegular"
-          FontSize="16"
-          TextColor="White"
-          VerticalOptions="Center" />
-                <controls:BrownButtonStart
-          Text="Login using employee credentials"
-          Command="{Binding LoginCommand}" />
-            </StackLayout>
-
-            <!-- New employee -->
-            <StackLayout Orientation="Horizontal" Spacing="10" VerticalOptions="Center">
-                <Label
-          Text="New employee?"
-          FontFamily="PoppinsRegular"
-          FontSize="16"
-          TextColor="White"
-          VerticalOptions="Center" />
-                <controls:BrownButtonStart
-          Text="Create an account"
-          Command="{Binding CreateAccountCommand}" 
-                    Margin="25,0,0,0"
-                    />
-            </StackLayout>
+      Spacing="10">
+            <Label
+        Text="Welcome to bibliothequaria!"
+        FontFamily="PoppinsBold"
+        FontSize="24"
+        TextColor="White"
+        HorizontalOptions="Center" />
+            <Label
+        Text="Create an account:"
+        FontFamily="PoppinsRegular"
+        FontSize="18"
+        TextColor="White"
+        HorizontalOptions="Center" />
         </StackLayout>
 
-        <!-- Row 3: Back arrow -->
+        <!-- Form fields (row 2) -->
+        <StackLayout
+      Grid.Row="2"
+      Spacing="20"
+      VerticalOptions="Center"
+      HorizontalOptions="Center"
+      WidthRequest="400">
+
+            <!-- Name -->
+            <Entry
+        x:Name="NameEntry"
+        Placeholder="Name"
+        FontFamily="PoppinsRegular"
+        TextColor="White"
+        PlaceholderColor="#CCCCCC" />
+
+            <!-- Surname -->
+            <Entry
+        x:Name="SurnameEntry"
+        Placeholder="Surname"
+        FontFamily="PoppinsRegular"
+        TextColor="White"
+        PlaceholderColor="#CCCCCC" />
+
+            <!-- E-mail -->
+            <Entry
+        x:Name="EmailEntry"
+        Placeholder="E-mail address"
+        Keyboard="Email"
+        FontFamily="PoppinsRegular"
+        TextColor="White"
+        PlaceholderColor="#CCCCCC" />
+
+            <!-- Password -->
+            <Entry
+        x:Name="PasswordEntry"
+        Placeholder="Password"
+        IsPassword="True"
+        FontFamily="PoppinsRegular"
+        TextColor="White"
+        PlaceholderColor="#CCCCCC" />
+        </StackLayout>
+
+        <!-- Register button (row 3) -->
+        <controls:BrownButtonStart
+      Grid.Row="3"
+      Text="Register"
+      Command="{Binding RegisterCommand}"
+      HorizontalOptions="Center"
+      Margin="0,10,0,100"
+      WidthRequest="300" />
+
+        <!-- Back arrow (row 3 test, left) -->
         <Image
       Grid.Row="3"
       Source="backarrow.png"
       HeightRequest="40"
       WidthRequest="40"
       HorizontalOptions="Start"
-      VerticalOptions="Center">
+      VerticalOptions="Center"
+      Margin="0,120,0,0">
             <Image.GestureRecognizers>
                 <TapGestureRecognizer Tapped="OnBackArrowTapped" />
             </Image.GestureRecognizers>
         </Image>
 
-        <!-- Row 4: Footer -->
+        <!-- Footer (row 4, bottom) -->
         <Grid
       Grid.Row="4"
       ColumnDefinitions="Auto,*,Auto"
@@ -89,7 +118,6 @@
           TextColor="#787676"
           VerticalOptions="Center" />
             </StackLayout>
-
             <Label
         Grid.Column="1"
         Text="© 2025 Bibliothequaria - All Rights Reserved"
@@ -98,7 +126,6 @@
         TextColor="#FDBF1D"
         HorizontalOptions="Center"
         Margin="0,0,-85,0"/>
-
             <StackLayout
         Grid.Column="2"
         Orientation="Horizontal"
@@ -116,5 +143,6 @@
           TextColor="#FDBF1D" />
             </StackLayout>
         </Grid>
+
     </Grid>
 </ContentPage>

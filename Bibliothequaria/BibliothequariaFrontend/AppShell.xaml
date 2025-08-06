@@ -27,4 +27,22 @@
         </ShellContent.ContentTemplate>
     </ShellContent>
 
+    <!--Register route tied to the RegisterPage.xaml, in the MainPage.xaml.cs-->
+    <ShellContent Route="register">
+        <ShellContent.ContentTemplate>
+            <DataTemplate>
+                <pages:RegisterPage />
+            </DataTemplate>
+        </ShellContent.ContentTemplate>
+    </ShellContent>
+    
+    <!--Login route tied to the LoginPage.xaml, in the MainPage.xaml.cs-->
+    <ShellContent Route="login">
+        <ShellContent.ContentTemplate>
+            <DataTemplate>
+                <pages:LoginPage />
+            </DataTemplate>
+        </ShellContent.ContentTemplate>
+    </ShellContent>
+
 </Shell>

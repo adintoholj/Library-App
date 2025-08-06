@@ -3,13 +3,14 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:BibliothequariaFrontend.Controls"
-    x:Class="BibliothequariaFrontend.Pages.MainPage"
+    x:Class="BibliothequariaFrontend.Pages.LoginPage"
     BackgroundColor="#4A4646"
     Padding="20"
     Shell.NavBarIsVisible="False">
 
     <Grid RowDefinitions="Auto,Auto,*,Auto,Auto">
-        <!-- Row 0: Top-left logo -->
+
+        <!-- Row 0: Logo -->
         <Image
       Grid.Row="0"
       Source="yellowbook.png"
@@ -17,49 +18,62 @@
       HorizontalOptions="Start"
       VerticalOptions="Start" />
 
-        <!-- Row 1: Title -->
-        <Label
-      Grid.Row="1"
-      Text="Welcome to bibliothequaria!"
-      FontFamily="PoppinsBold"
-      FontSize="24"
-      TextColor="White"
-      HorizontalOptions="Center" />
-
-        <!-- Row 2: Buttons area -->
+        <!-- Row 1: Titles -->
         <StackLayout
-      Grid.Row="2"
+      Grid.Row="1"
       VerticalOptions="Center"
       HorizontalOptions="Center"
-      Spacing="20">
+      Spacing="10">
+            <Label
+        Text="Welcome to bibliothequaria!"
+        FontFamily="PoppinsBold"
+        FontSize="24"
+        TextColor="White"
+        HorizontalOptions="Center" />
+            <Label
+        Text="Sign in:"
+        FontFamily="PoppinsRegular"
+        FontSize="18"
+        TextColor="White"
+        HorizontalOptions="Center" />
+        </StackLayout>
 
-            <!-- Existing employee -->
-            <StackLayout Orientation="Horizontal" Spacing="10" VerticalOptions="Center">
-                <Label
-          Text="Existing employee?"
-          FontFamily="PoppinsRegular"
-          FontSize="16"
-          TextColor="White"
-          VerticalOptions="Center" />
-                <controls:BrownButtonStart
-          Text="Login using employee credentials"
-          Command="{Binding LoginCommand}" />
-            </StackLayout>
+        <!-- Row 2: Inputs + Centered Login button -->
+        <StackLayout
+      Grid.Row="2"
+      Spacing="20"
+      VerticalOptions="Center"
+      HorizontalOptions="Center"
+      WidthRequest="400">
 
-            <!-- New employee -->
-            <StackLayout Orientation="Horizontal" Spacing="10" VerticalOptions="Center">
-                <Label
-          Text="New employee?"
-          FontFamily="PoppinsRegular"
-          FontSize="16"
-          TextColor="White"
-          VerticalOptions="Center" />
-                <controls:BrownButtonStart
-          Text="Create an account"
-          Command="{Binding CreateAccountCommand}" 
-                    Margin="25,0,0,0"
-                    />
-            </StackLayout>
+            <!-- E-mail address -->
+            <Entry
+        Placeholder="E-mail address"
+        Keyboard="Email"
+        FontFamily="PoppinsRegular"
+        TextColor="White"
+        PlaceholderColor="#CCCCCC" />
+
+            <!-- Password -->
+            <Entry
+        Placeholder="Password"
+        IsPassword="True"
+        FontFamily="PoppinsRegular"
+        TextColor="White"
+        PlaceholderColor="#CCCCCC" />
+
+            <!-- Forgot password link -->
+            <Label
+        Text="Forgot password?"
+        FontFamily="PoppinsRegular"
+        FontSize="12"
+        TextColor="#FDBF1D" />
+
+            <!-- Centered Login button -->
+            <controls:BrownButtonStart
+        Text="Login"
+        Command="{Binding LoginCommand}"
+        HorizontalOptions="Center" />
         </StackLayout>
 
         <!-- Row 3: Back arrow -->
@@ -89,16 +103,14 @@
           TextColor="#787676"
           VerticalOptions="Center" />
             </StackLayout>
-
             <Label
         Grid.Column="1"
-        Text="© 2025 Bibliothequaria - All Rights Reserved"
+        Text="© 2025 Bibliothequaria – All Rights Reserved"
         FontFamily="PoppinsRegular"
         FontSize="12"
         TextColor="#FDBF1D"
         HorizontalOptions="Center"
         Margin="0,0,-85,0"/>
-
             <StackLayout
         Grid.Column="2"
         Orientation="Horizontal"
@@ -116,5 +128,6 @@
           TextColor="#FDBF1D" />
             </StackLayout>
         </Grid>
+
     </Grid>
 </ContentPage>

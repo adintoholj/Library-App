@@ -106,7 +106,8 @@
                    FontFamily="PoppinsRegular"
                    FontSize="12"
                    TextColor="#FDBF1D"
-                   HorizontalOptions="Center" />
+                   HorizontalOptions="Center"
+                   Margin="0,0,-85,0"/>
 
             <!-- Links -->
             <StackLayout Grid.Column="2" Orientation="Horizontal" Spacing="10" HorizontalOptions="End">
