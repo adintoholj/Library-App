@@ -53,5 +53,15 @@
             </DataTemplate>
         </ShellContent.ContentTemplate>
     </ShellContent>
+    
+    <!--Member operations route-->
+    <ShellContent Route="memberoperations">
+        <ShellContent.ContentTemplate>
+            <DataTemplate>
+                <pages:MemberOperationsPage />
+            </DataTemplate>
+        </ShellContent.ContentTemplate>
+    </ShellContent>
+
 
 </Shell>

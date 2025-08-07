@@ -50,15 +50,25 @@
                 </Frame>
 
                 <!-- Member operations -->
-                <StackLayout Orientation="Horizontal" Spacing="15" VerticalOptions="Center">
-                    <Image Source="memberoperations.png" HeightRequest="24" WidthRequest="24" />
-                    <Label
-            Text="Member operations"
-            FontFamily="PoppinsBold"
-            FontSize="18"
-            TextColor="Black"
-            VerticalOptions="Center" />
+                <StackLayout
+  Orientation="Horizontal"
+  Spacing="15"
+  VerticalOptions="Center">
+
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnMemberOperationsTapped" />
+                    </StackLayout.GestureRecognizers>
+
+                    <Image Source="memberoperations.png"
+         HeightRequest="24"
+         WidthRequest="24" />
+                    <Label Text="Member operations"
+         FontFamily="PoppinsBold"
+         FontSize="18"
+         TextColor="Black"
+         VerticalOptions="Center" />
                 </StackLayout>
+
 
                 <!-- Book operations -->
                 <StackLayout Orientation="Horizontal" Spacing="15" VerticalOptions="Center">

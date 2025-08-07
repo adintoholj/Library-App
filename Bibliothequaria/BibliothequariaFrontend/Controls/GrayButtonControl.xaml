@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    x:Name="root"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="BibliothequariaFrontend.Controls.GrayButtonControl">
+
+    <Frame
+      BackgroundColor="#BABABA"
+      CornerRadius="8"
+      HasShadow="False"
+      HeightRequest="56"
+      WidthRequest="203"
+      HorizontalOptions="Center"
+      Padding="0">
+
+        <!-- Button text -->
+        <Label
+      Text="{Binding Source={x:Reference root}, Path=Text}"
+      FontFamily="PoppinsRegular"
+      FontSize="16"
+      TextColor="Black"
+      VerticalOptions="Center"
+      HorizontalOptions="Center" />
+
+        <!-- Tap handling -->
+        <Frame.GestureRecognizers>
+            <TapGestureRecognizer
+        Command="{Binding Source={x:Reference root}, Path=Command}" />
+        </Frame.GestureRecognizers>
+    </Frame>
+</ContentView>

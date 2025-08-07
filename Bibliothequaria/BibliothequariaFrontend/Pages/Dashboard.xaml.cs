@@ -1,9 +1,19 @@
-namespace BibliothequariaFrontend.Pages;
+using Microsoft.Maui.Controls;
+using System;
 
-public partial class Dashboard : ContentPage
+namespace BibliothequariaFrontend.Pages
 {
-	public Dashboard()
-	{
-		InitializeComponent();
-	}
+    public partial class Dashboard : ContentPage
+    {
+        public Dashboard()
+        {
+            InitializeComponent();
+        }
+
+        private async void OnMemberOperationsTapped(object sender, EventArgs e)
+        {
+            // Assumes you've registered the "memberoperations" route in AppShell.xaml
+            await Shell.Current.GoToAsync("//memberoperations");
+        }
+    }
 }

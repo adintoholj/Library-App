@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+  xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+  xmlns:controls="clr-namespace:BibliothequariaFrontend.Controls"
+  x:Class="BibliothequariaFrontend.Pages.MemberOperationsPage"
+  BackgroundColor="#4A4646"
+  Shell.NavBarIsVisible="False"
+  Padding="0">
+
+    <Grid ColumnDefinitions="373, *">
+
+        <!-- NAV BAR -->
+        <Grid
+      Grid.Column="0"
+      BackgroundColor="#FDBF1D"
+      RowDefinitions="100,*,60"
+      Padding="20">
+
+            <!-- Row 0: Logo -->
+            <Image
+        Grid.Row="0"
+        Source="bibliothequarialogo.png"
+        HeightRequest="80"
+        HorizontalOptions="Start"
+        VerticalOptions="Center" />
+
+            <!-- Row 1: Main nav items -->
+            <StackLayout
+        Grid.Row="1"
+        Spacing="40"
+        Padding="10,20,0,0">
+
+                <!-- Dashboard (tappable) -->
+                <StackLayout
+  Orientation="Horizontal"
+  Spacing="15"
+  VerticalOptions="Center"
+                    Margin="0,20,10,-15">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnDashboardTapped" />
+                    </StackLayout.GestureRecognizers>
+
+                    <Image Source="dashboard.png" HeightRequest="24" WidthRequest="24" />
+                    <Label
+    Text="Dashboard"
+    FontFamily="PoppinsBold"
+    FontSize="18"
+    TextColor="Black"
+    VerticalOptions="Center" />
+                </StackLayout>
+
+
+                <!-- Member operations (selected) -->
+                <Frame
+          BackgroundColor="#3A3428"
+          CornerRadius="8"
+          Padding="10"
+          HasShadow="False"
+          HorizontalOptions="Fill"
+          Margin="-10,10,10,-10">
+                    <StackLayout Orientation="Horizontal" Spacing="15" VerticalOptions="Center">
+                        <Image Source="memberoperations.png" HeightRequest="24" WidthRequest="24" />
+                        <Label
+              Text="Member operations"
+              FontFamily="PoppinsBold"
+              FontSize="18"
+              TextColor="White"
+              VerticalOptions="Center" />
+                    </StackLayout>
+                </Frame>
+
+                <!-- Book operations -->
+                <StackLayout Orientation="Horizontal" Spacing="15" VerticalOptions="Center">
+                    <Image Source="bookoperations.png" HeightRequest="24" WidthRequest="24" />
+                    <Label
+            Text="Book operations"
+            FontFamily="PoppinsBold"
+            FontSize="18"
+            TextColor="Black"
+            VerticalOptions="Center" />
+                </StackLayout>
+
+                <!-- Search -->
+                <StackLayout Orientation="Horizontal" Spacing="15" VerticalOptions="Center">
+                    <Image Source="searchoperations.png" HeightRequest="24" WidthRequest="24" />
+                    <Label
+            Text="Search"
+            FontFamily="PoppinsBold"
+            FontSize="18"
+            TextColor="Black"
+            VerticalOptions="Center" />
+                </StackLayout>
+
+            </StackLayout>
+
+            <!-- Row 2: Settings at bottom -->
+            <StackLayout
+        Grid.Row="2"
+        Orientation="Horizontal"
+        Spacing="15"
+        VerticalOptions="Center"
+        Padding="10,0,0,0">
+                <Image Source="settings.png" HeightRequest="24" WidthRequest="24" />
+                <Label
+          Text="Settings"
+          FontFamily="PoppinsBold"
+          FontSize="18"
+          TextColor="Black"
+          VerticalOptions="Center" />
+            </StackLayout>
+
+        </Grid>
+
+        <!-- MAIN CONTENT -->
+        <Grid
+      Grid.Column="1"
+      RowDefinitions="Auto,*,Auto"
+      Padding="30">
+
+            <!-- Header -->
+            <Grid Grid.Row="0" ColumnDefinitions="*,Auto">
+                <StackLayout Spacing="5">
+                    <Label
+            Text="Member operations"
+            FontFamily="PoppinsBold"
+            FontSize="24"
+            TextColor="White" />
+                    <Label
+            Text="In here, you can add new users or change the status of an existing user"
+            FontFamily="PoppinsRegular"
+            FontSize="16"
+            TextColor="White"
+            LineBreakMode="WordWrap" />
+                </StackLayout>
+
+                <!-- Profile pic -->
+                <Image
+          Grid.Column="1"
+          Source="pfp.png"
+          HeightRequest="50"
+          WidthRequest="50"
+          HorizontalOptions="End"
+          VerticalOptions="Center" />
+
+            </Grid>
+
+            <!-- Table container -->
+            <Frame
+        Grid.Row="1"
+        BackgroundColor="#DBCC99"
+        CornerRadius="8"
+        Padding="10"
+        HasShadow="False">
+
+                <ScrollView>
+                    <Grid
+            ColumnDefinitions="2*,*,*,*"
+            RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto"
+            ColumnSpacing="5"
+            RowSpacing="20"
+            VerticalOptions="Start">
+
+                        <!-- Header row -->
+                        <Label
+              Grid.Row="0" Grid.Column="0"
+              Text="Name &amp; Surname"
+              FontFamily="PoppinsBold"
+              FontSize="14"
+              TextColor="Black" 
+               Margin="70,0,0,0"/>
+                        <Label
+              Grid.Row="0" Grid.Column="1"
+              Text="Date added"
+              FontFamily="PoppinsBold"
+              FontSize="14"
+              TextColor="Black" />
+                        <Label
+              Grid.Row="0" Grid.Column="2"
+              Text="Date of expiry"
+              FontFamily="PoppinsBold"
+              FontSize="14"
+              TextColor="Black" />
+                        <Label
+              Grid.Row="0" Grid.Column="3"
+              Text="Currently borrowed books"
+              FontFamily="PoppinsBold"
+              FontSize="14"
+              TextColor="Black" />
+
+                        <!-- Sample data rows -->
+                        
+                        <Image
+              Grid.Row="1" Grid.Column="0"
+              Source="littlemember.png"
+              HeightRequest="20"
+              WidthRequest="20"
+              VerticalOptions="Center" />
+                        <Label
+              Grid.Row="1" Grid.Column="0"
+              Text="Mary Jane"
+              FontFamily="PoppinsRegular"
+              FontSize="14"
+              TextColor="Black"
+              Margin="30,0,0,0" />
+
+                        
+                        <Image
+              Grid.Row="2" Grid.Column="0"
+              Source="littlemember.png"
+              HeightRequest="20"
+              WidthRequest="20"
+              VerticalOptions="Center" />
+                        <Label
+              Grid.Row="2" Grid.Column="0"
+              Text="Tom Miller"
+              FontFamily="PoppinsRegular"
+              FontSize="14"
+              TextColor="Black"
+              Margin="30,0,0,0" />
+
+                        
+                        <Image
+              Grid.Row="3" Grid.Column="0"
+              Source="littlemember.png"
+              HeightRequest="20"
+              WidthRequest="20"
+              VerticalOptions="Center" />
+                        <Label
+              Grid.Row="3" Grid.Column="0"
+              Text="Lisa Johnson"
+              FontFamily="PoppinsRegular"
+              FontSize="14"
+              TextColor="Black"
+              Margin="30,0,0,0" />
+
+                        
+                        <Image
+              Grid.Row="4" Grid.Column="0"
+              Source="littlemember.png"
+              HeightRequest="20"
+              WidthRequest="20"
+              VerticalOptions="Center" />
+                        <Label
+              Grid.Row="4" Grid.Column="0"
+              Text="Emily Brown"
+              FontFamily="PoppinsRegular"
+              FontSize="14"
+              TextColor="Black"
+              Margin="30,0,0,0" />
+
+                        
+                        <Image
+              Grid.Row="5" Grid.Column="0"
+              Source="littlemember.png"
+              HeightRequest="20"
+              WidthRequest="20"
+              VerticalOptions="Center" />
+                        <Label
+              Grid.Row="5" Grid.Column="0"
+              Text="Sam Hall"
+              FontFamily="PoppinsRegular"
+              FontSize="14"
+              TextColor="Black"
+              Margin="30,0,0,0" />
+
+                        
+                        <Image
+              Grid.Row="6" Grid.Column="0"
+              Source="littlemember.png"
+              HeightRequest="20"
+              WidthRequest="20"
+              VerticalOptions="Center" />
+                        <Label
+              Grid.Row="6" Grid.Column="0"
+              Text="Ben Lewis"
+              FontFamily="PoppinsRegular"
+              FontSize="14"
+              TextColor="Black"
+              Margin="30,0,0,0" />
+
+                        
+                        <Image
+              Grid.Row="7" Grid.Column="0"
+              Source="littlemember.png"
+              HeightRequest="20"
+              WidthRequest="20"
+              VerticalOptions="Center" />
+                        <Label
+              Grid.Row="7" Grid.Column="0"
+              Text="Mark Wilson"
+              FontFamily="PoppinsRegular"
+              FontSize="14"
+              TextColor="Black"
+              Margin="30,0,0,0" />
+
+                        
+                        <Image
+              Grid.Row="8" Grid.Column="0"
+              Source="littlemember.png"
+              HeightRequest="20"
+              WidthRequest="20"
+              VerticalOptions="Center" />
+                        <Label
+              Grid.Row="8" Grid.Column="0"
+              Text="Megan Lewis"
+              FontFamily="PoppinsRegular"
+              FontSize="14"
+              TextColor="Black"
+              Margin="30,0,0,0" />
+
+                        
+                        <Image
+              Grid.Row="9" Grid.Column="0"
+              Source="littlemember.png"
+              HeightRequest="20"
+              WidthRequest="20"
+              VerticalOptions="Center" />
+                        <Label
+              Grid.Row="9" Grid.Column="0"
+              Text="Laura Clark"
+              FontFamily="PoppinsRegular"
+              FontSize="14"
+              TextColor="Black"
+              Margin="30,0,0,0" />
+
+                        <!-- Empty cells: the other 3 columns are left blank for future data -->
+                    </Grid>
+                </ScrollView>
+            </Frame>
+
+            <!-- Bottom buttons -->
+            <StackLayout
+        Grid.Row="2"
+        Orientation="Horizontal"
+        Spacing="20"
+        HorizontalOptions="Center"
+        Padding="0,10,0,0">
+                <controls:GrayButtonControl
+          Text="View loan history"
+          Command="{Binding SeeInChargeCommand}" />
+                <controls:GrayButtonControl
+          Text="Change member status"
+          Command="{Binding ChangeStatusCommand}" />
+                <controls:GrayButtonControl
+          Text="Add user"
+          Command="{Binding AddUserCommand}" />
+            </StackLayout>
+
+        </Grid>
+    </Grid>
+</ContentPage>
