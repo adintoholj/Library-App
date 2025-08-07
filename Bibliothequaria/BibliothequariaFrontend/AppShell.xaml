@@ -45,4 +45,13 @@
         </ShellContent.ContentTemplate>
     </ShellContent>
 
+    <!-- login and register routes to the dashboard screen -->
+    <ShellContent Route="dashboard">
+        <ShellContent.ContentTemplate>
+            <DataTemplate>
+                <pages:Dashboard />
+            </DataTemplate>
+        </ShellContent.ContentTemplate>
+    </ShellContent>
+
 </Shell>

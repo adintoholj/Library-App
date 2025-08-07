@@ -12,11 +12,11 @@ namespace BibliothequariaFrontend.Pages
         {
             InitializeComponent();
 
-            // Stubbed command: replace with real login logic
+            // Navigate to the dashboard after (stubbed) login
             LoginCommand = new Command(async () =>
             {
-                // TODO: validate credentials, call API, then...
-                await Shell.Current.GoToAsync("//main");
+                // TODO: validate credentials, call API, then:
+                await Shell.Current.GoToAsync("//dashboard");
             });
 
             BindingContext = this;
@@ -24,6 +24,7 @@ namespace BibliothequariaFrontend.Pages
 
         private async void OnBackArrowTapped(object sender, EventArgs e)
         {
+            // Back to main (or splash) as before
             await Shell.Current.GoToAsync("//main");
         }
     }

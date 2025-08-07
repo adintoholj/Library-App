@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+  xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+  x:Class="BibliothequariaFrontend.Pages.Dashboard"
+  BackgroundColor="#4A4646"
+  Shell.NavBarIsVisible="False"
+  Padding="0">
+
+    <Grid ColumnDefinitions="373, *">
+
+        <!-- NAV BAR -->
+        <Grid
+      Grid.Column="0"
+      BackgroundColor="#FDBF1D"
+      RowDefinitions="100,*,60"
+      Padding="20">
+
+            <!-- Row 0: Logo -->
+            <Image
+        Grid.Row="0"
+        Source="bibliothequarialogo.png"
+        HeightRequest="80"
+        HorizontalOptions="Start"
+        VerticalOptions="Center" />
+
+            <!-- Row 1: Main nav items -->
+            <StackLayout
+        Grid.Row="1"
+        Spacing="40"
+        Padding="10,20,0,0">
+
+                <!-- Dashboard (selected) -->
+                <Frame
+          BackgroundColor="#3A3428"
+          CornerRadius="8"
+          Padding="10"
+          HasShadow="False"
+          HorizontalOptions="Fill"
+                    Margin="-10,10,10,-5">
+                    <StackLayout Orientation="Horizontal" Spacing="15" VerticalOptions="Center">
+                        <Image Source="dashboard.png" HeightRequest="24" WidthRequest="24" />
+                        <Label
+              Text="Dashboard"
+              FontFamily="PoppinsBold"
+              FontSize="18"
+              TextColor="White"
+              VerticalOptions="Center" />
+                    </StackLayout>
+                </Frame>
+
+                <!-- Member operations -->
+                <StackLayout Orientation="Horizontal" Spacing="15" VerticalOptions="Center">
+                    <Image Source="memberoperations.png" HeightRequest="24" WidthRequest="24" />
+                    <Label
+            Text="Member operations"
+            FontFamily="PoppinsBold"
+            FontSize="18"
+            TextColor="Black"
+            VerticalOptions="Center" />
+                </StackLayout>
+
+                <!-- Book operations -->
+                <StackLayout Orientation="Horizontal" Spacing="15" VerticalOptions="Center">
+                    <Image Source="bookoperations.png" HeightRequest="24" WidthRequest="24" />
+                    <Label
+            Text="Book operations"
+            FontFamily="PoppinsBold"
+            FontSize="18"
+            TextColor="Black"
+            VerticalOptions="Center" />
+                </StackLayout>
+
+                <!-- Search -->
+                <StackLayout Orientation="Horizontal" Spacing="15" VerticalOptions="Center">
+                    <Image Source="searchoperations.png" HeightRequest="24" WidthRequest="24" />
+                    <Label
+            Text="Search"
+            FontFamily="PoppinsBold"
+            FontSize="18"
+            TextColor="Black"
+            VerticalOptions="Center" />
+                </StackLayout>
+
+            </StackLayout>
+
+            <!-- Row 2: Settings at bottom -->
+            <StackLayout
+        Grid.Row="2"
+        Orientation="Horizontal"
+        Spacing="15"
+        VerticalOptions="Center"
+        Padding="10,0,0,0">
+                <Image Source="settings.png" HeightRequest="24" WidthRequest="24" />
+                <Label
+          Text="Settings"
+          FontFamily="PoppinsBold"
+          FontSize="18"
+          TextColor="Black"
+          VerticalOptions="Center" />
+            </StackLayout>
+        </Grid>
+
+        <!-- MAIN CONTENT -->
+        <Grid Grid.Column="1" Padding="30">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <!-- Header -->
+            <Grid Grid.Row="0" ColumnDefinitions="*,Auto">
+                <StackLayout Spacing="5">
+                    <Label
+            Text="Dashboard"
+            FontFamily="PoppinsBold"
+            FontSize="24"
+            TextColor="White" />
+                    <Label FontFamily="PoppinsRegular" FontSize="18">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Welcome, " />
+                                <Span Text="Adin!" TextColor="#FDBF1D" />
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                </StackLayout>
+
+                <Image
+          Grid.Column="1"
+          Source="pfp.png"
+          HeightRequest="50"
+          WidthRequest="50"
+          HorizontalOptions="End"
+          VerticalOptions="Center" />
+            </Grid>
+
+            <!-- Cards -->
+            <Grid
+        Grid.Row="1"
+        Margin="0,-180,0,10"
+        ColumnDefinitions="407,404"
+        RowDefinitions="778,370"
+        ColumnSpacing="20"
+        RowSpacing="20">
+
+                <!-- Activities (spans two rows) -->
+                <Frame
+          Grid.Row="0"
+          Grid.Column="0"
+          Grid.RowSpan="2"
+          BackgroundColor="#DBCC99"
+          CornerRadius="8"
+          Padding="20"
+          HeightRequest="778"
+          WidthRequest="407"
+          HasShadow="False">
+                    <StackLayout Spacing="20">
+                        <!-- Title -->
+                        <StackLayout Orientation="Horizontal" Spacing="10">
+                            <Image Source="meteor.png" HeightRequest="24" WidthRequest="24" />
+                            <Label
+                Text="Activities"
+                FontFamily="PoppinsBold"
+                FontSize="18"
+                TextColor="Black" />
+                        </StackLayout>
+                        <!-- Items -->
+                        <StackLayout Spacing="15">
+                            <StackLayout Orientation="Horizontal" Spacing="10">
+                                <Image Source="bookplus.png" HeightRequest="20" WidthRequest="20" />
+                                <Label
+                  Text="John Doe has just borrowed “Crime and Punishment”"
+                  FontFamily="PoppinsRegular"
+                  FontSize="14"
+                  TextColor="Black" />
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal" Spacing="10">
+                                <Image Source="bookskull.png" HeightRequest="20" WidthRequest="20" />
+                                <Label
+                  Text="2 users haven’t returned their borrowed books before the deadline!"
+                  FontFamily="PoppinsRegular"
+                  FontSize="14"
+                  TextColor="Black" />
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal" Spacing="10">
+                                <Image Source="useractivity.png" HeightRequest="20" WidthRequest="20" />
+                                <Label
+                  Text="Elizabeth Jane has just borrowed “Anna Karenina”"
+                  FontFamily="PoppinsRegular"
+                  FontSize="14"
+                  TextColor="Black" />
+                            </StackLayout>
+                            <StackLayout Orientation="Horizontal" Spacing="10">
+                                <Image Source="truck.png" HeightRequest="20" WidthRequest="20" />
+                                <Label
+                  Text="5 new books are arriving by the end of May (05/2025)"
+                  FontFamily="PoppinsRegular"
+                  FontSize="14"
+                  TextColor="Black" 
+                  LineBreakMode="WordWrap"/>
+                            </StackLayout>
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+
+                <!-- Past logins -->
+                <Frame
+          Grid.Row="0"
+          Grid.Column="1"
+          BackgroundColor="#DBCC99"
+          CornerRadius="8"
+          Padding="20"
+          HeightRequest="370"
+          WidthRequest="404"
+          HasShadow="False"
+                    Margin="0,-20,0,0">
+                    <StackLayout Spacing="15">
+                        <StackLayout Orientation="Horizontal" Spacing="10">
+                            <Image Source="pastlogins.png" HeightRequest="24" WidthRequest="24" />
+                            <Label
+                Text="Past logins"
+                FontFamily="PoppinsBold"
+                FontSize="18"
+                TextColor="Black" />
+                        </StackLayout>
+                        <StackLayout Spacing="10">
+                            <StackLayout Orientation="Horizontal" Spacing="10">
+                                <Image Source="pastloginlaptop.png" HeightRequest="16" WidthRequest="16" />
+                                <Label
+                  Text="Login at 19:00, 17/05/2025"
+                  FontFamily="PoppinsRegular"
+                  FontSize="14"
+                  TextColor="Black" />
+                            </StackLayout>
+                            <!-- ...repeat for other entries... -->
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+
+                <!-- Quote of the day -->
+                <Frame
+          Grid.Row="1"
+          Grid.Column="1"
+          BackgroundColor="#DBCC99"
+          CornerRadius="8"
+          Padding="20"
+          HeightRequest="370"
+          WidthRequest="404"
+          HasShadow="False"
+                    Margin="0,-400,0,0">
+                    <StackLayout Spacing="15">
+                        <StackLayout Orientation="Horizontal" Spacing="10">
+                            <Image Source="quote.png" HeightRequest="24" WidthRequest="24" />
+                            <Label
+                Text="Quote of the day"
+                FontFamily="PoppinsBold"
+                FontSize="18"
+                TextColor="Black" />
+                        </StackLayout>
+                        <Label
+              Text="“Believe you can and you’re halfway there.” — Theodore Roosevelt"
+              FontFamily="PoppinsRegular"
+              FontSize="14"
+              TextColor="Black"
+              LineBreakMode="WordWrap" />
+                    </StackLayout>
+                </Frame>
+
+            </Grid>
+        </Grid>
+    </Grid>
+</ContentPage>
