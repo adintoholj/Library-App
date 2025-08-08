@@ -63,5 +63,14 @@
         </ShellContent.ContentTemplate>
     </ShellContent>
 
+    <!--Book operations route-->
+    <ShellContent Route="bookoperations">
+        <ShellContent.ContentTemplate>
+            <DataTemplate>
+                <pages:BookOperations />
+            </DataTemplate>
+        </ShellContent.ContentTemplate>
+    </ShellContent>
+
 
 </Shell>

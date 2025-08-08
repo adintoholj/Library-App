@@ -1,4 +1,4 @@
-using Microsoft.Maui.Controls;
+﻿using Microsoft.Maui.Controls;
 using System;
 
 namespace BibliothequariaFrontend.Pages
@@ -12,8 +12,19 @@ namespace BibliothequariaFrontend.Pages
 
         private async void OnMemberOperationsTapped(object sender, EventArgs e)
         {
-            // Assumes you've registered the "memberoperations" route in AppShell.xaml
             await Shell.Current.GoToAsync("//memberoperations");
         }
+
+        // ⇩ New handler ⇩
+        private async void OnBookOperationsTapped(object sender, EventArgs e)
+        {
+            await Shell.Current.GoToAsync("//bookoperations");
+        }
+
+        private async void OnSearchTapped(object sender, EventArgs e)
+        {
+            await Shell.Current.GoToAsync("//search");
+        }
+
     }
 }

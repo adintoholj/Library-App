@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+  xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+  xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+  xmlns:controls="clr-namespace:BibliothequariaFrontend.Controls"
+  x:Class="BibliothequariaFrontend.Pages.BookOperations"
+  BackgroundColor="#4A4646"
+  Shell.NavBarIsVisible="False"
+  Padding="0">
+
+    <Grid ColumnDefinitions="373, *">
+
+        <!-- NAV BAR -->
+        <Grid
+      Grid.Column="0"
+      BackgroundColor="#FDBF1D"
+      RowDefinitions="100,*,60"
+      Padding="20">
+
+            <!-- Logo -->
+            <Image
+        Grid.Row="0"
+        Source="bibliothequarialogo.png"
+        HeightRequest="80"
+        HorizontalOptions="Start"
+        VerticalOptions="Center" />
+
+            <!-- Nav items -->
+            <StackLayout
+        Grid.Row="1"
+        Spacing="40"
+        Padding="10,20,0,0">
+
+                <!-- Dashboard (tappable) -->
+                <StackLayout Orientation="Horizontal" Spacing="15" VerticalOptions="Center" Margin="0,20,0,5">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnDashboardTapped" />
+                    </StackLayout.GestureRecognizers>
+                    <Image Source="dashboard.png" HeightRequest="24" WidthRequest="24" />
+                    <Label
+            Text="Dashboard"
+            FontFamily="PoppinsBold"
+            FontSize="18"
+            TextColor="Black"
+            VerticalOptions="Center" />
+                </StackLayout>
+
+                <!-- Member operations (tappable) -->
+                <StackLayout Orientation="Horizontal" Spacing="15" VerticalOptions="Center" Margin="0,0,0,0">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnMemberOperationsTapped" />
+                    </StackLayout.GestureRecognizers>
+                    <Image Source="memberoperations.png" HeightRequest="24" WidthRequest="24" />
+                    <Label
+            Text="Member operations"
+            FontFamily="PoppinsBold"
+            FontSize="18"
+            TextColor="Black"
+            VerticalOptions="Center" />
+                </StackLayout>
+
+                <!-- Book operations (selected) -->
+                <Frame
+          BackgroundColor="#3A3428"
+          CornerRadius="8"
+          Padding="10"
+          HasShadow="False"
+          HorizontalOptions="Fill"
+          Margin="-10,-10,10,-5">
+                    <StackLayout Orientation="Horizontal" Spacing="15" VerticalOptions="Center" >
+                        <Image Source="bookoperations.png" HeightRequest="24" WidthRequest="24" />
+                        <Label
+              Text="Book operations"
+              FontFamily="PoppinsBold"
+              FontSize="18"
+              TextColor="White"
+              VerticalOptions="Center" />
+                    </StackLayout>
+                </Frame>
+
+                <!-- Search (tappable) -->
+                <StackLayout
+  Orientation="Horizontal"
+  Spacing="15"
+  VerticalOptions="Center">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnSearchTapped" />
+                    </StackLayout.GestureRecognizers>
+                    <Image
+    Source="searchoperations.png"
+    HeightRequest="24"
+    WidthRequest="24" />
+                    <Label
+    Text="Search"
+    FontFamily="PoppinsBold"
+    FontSize="18"
+    TextColor="Black"
+    VerticalOptions="Center" />
+                </StackLayout>
+
+
+            </StackLayout>
+
+            <!-- Settings -->
+            <StackLayout
+        Grid.Row="2"
+        Orientation="Horizontal"
+        Spacing="15"
+        VerticalOptions="Center"
+        Padding="10,0,0,0">
+                <Image Source="settings.png" HeightRequest="24" WidthRequest="24" />
+                <Label
+          Text="Settings"
+          FontFamily="PoppinsBold"
+          FontSize="18"
+          TextColor="Black"
+          VerticalOptions="Center" />
+            </StackLayout>
+        </Grid>
+
+        <!-- MAIN CONTENT -->
+        <Grid
+      Grid.Column="1"
+      RowDefinitions="Auto,*,Auto"
+      Padding="30">
+
+            <!-- Header -->
+            <Grid Grid.Row="0" ColumnDefinitions="*,Auto">
+                <StackLayout Spacing="5">
+                    <Label
+            Text="Book operations"
+            FontFamily="PoppinsBold"
+            FontSize="24"
+            TextColor="White" />
+                    <Label
+            Text="In here, you can add new books, see which ones have been borrowed and which ones are currently available"
+            FontFamily="PoppinsRegular"
+            FontSize="16"
+            TextColor="White"
+            LineBreakMode="WordWrap" />
+                </StackLayout>
+                <Image
+          Grid.Column="1"
+          Source="pfp.png"
+          HeightRequest="50"
+          WidthRequest="50"
+          HorizontalOptions="End"
+          VerticalOptions="Center" />
+            </Grid>
+
+            <!-- Buttons area -->
+            <StackLayout
+        Grid.Row="1"
+        Spacing="20"
+        VerticalOptions="Center"
+        HorizontalOptions="Start">
+                <controls:GrayButtonControl
+          Text="Add a new book…"
+          Command="{Binding AddBookCommand}" />
+                <controls:GrayButtonControl
+          Text="List available books"
+          Command="{Binding ListAvailableBooksCommand}" />
+                <controls:GrayButtonControl
+          Text="List borrowed books"
+          Command="{Binding ListBorrowedBooksCommand}" />
+            </StackLayout>
+
+            <!-- Footer spacer -->
+            <BoxView Grid.Row="2" HeightRequest="20" Color="Transparent" />
+
+        </Grid>
+    </Grid>
+</ContentPage>

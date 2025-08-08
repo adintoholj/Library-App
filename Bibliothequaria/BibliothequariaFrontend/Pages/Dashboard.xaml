@@ -72,25 +72,38 @@
 
                 <!-- Book operations -->
                 <StackLayout Orientation="Horizontal" Spacing="15" VerticalOptions="Center">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnBookOperationsTapped" />
+                    </StackLayout.GestureRecognizers>
                     <Image Source="bookoperations.png" HeightRequest="24" WidthRequest="24" />
                     <Label
-            Text="Book operations"
-            FontFamily="PoppinsBold"
-            FontSize="18"
-            TextColor="Black"
-            VerticalOptions="Center" />
+Text="Book operations"
+FontFamily="PoppinsBold"
+FontSize="18"
+TextColor="Black"
+VerticalOptions="Center" />
                 </StackLayout>
 
-                <!-- Search -->
-                <StackLayout Orientation="Horizontal" Spacing="15" VerticalOptions="Center">
-                    <Image Source="searchoperations.png" HeightRequest="24" WidthRequest="24" />
+                <!-- Search (tappable) -->
+                <StackLayout
+  Orientation="Horizontal"
+  Spacing="15"
+  VerticalOptions="Center">
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnSearchTapped" />
+                    </StackLayout.GestureRecognizers>
+                    <Image
+    Source="searchoperations.png"
+    HeightRequest="24"
+    WidthRequest="24" />
                     <Label
-            Text="Search"
-            FontFamily="PoppinsBold"
-            FontSize="18"
-            TextColor="Black"
-            VerticalOptions="Center" />
+    Text="Search"
+    FontFamily="PoppinsBold"
+    FontSize="18"
+    TextColor="Black"
+    VerticalOptions="Center" />
                 </StackLayout>
+
 
             </StackLayout>
 
