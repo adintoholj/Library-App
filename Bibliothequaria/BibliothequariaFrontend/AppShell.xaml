@@ -90,4 +90,13 @@
         </ShellContent.ContentTemplate>
     </ShellContent>
 
+    <!--Profile info route-->
+    <ShellContent Route="profileinfo">
+        <ShellContent.ContentTemplate>
+            <DataTemplate>
+                <pages:ProfileInfo />
+            </DataTemplate>
+        </ShellContent.ContentTemplate>
+    </ShellContent>
+
 </Shell>

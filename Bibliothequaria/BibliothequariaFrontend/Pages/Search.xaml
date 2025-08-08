@@ -137,12 +137,15 @@
             LineBreakMode="WordWrap" />
                 </StackLayout>
                 <Image
-          Grid.Column="1"
-          Source="pfp.png"
-          HeightRequest="50"
-          WidthRequest="50"
-          HorizontalOptions="End"
-          VerticalOptions="Center" />
+    Source="pfp.png"
+    HeightRequest="50"
+    WidthRequest="50"
+    HorizontalOptions="End"
+    VerticalOptions="Center">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnAvatarTapped" />
+                    </Image.GestureRecognizers>
+                </Image>
             </Grid>
 
             <!-- Search field -->

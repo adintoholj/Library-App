@@ -1,4 +1,5 @@
-﻿using Microsoft.Maui.Controls;
+﻿using CommunityToolkit.Maui.Views;
+using Microsoft.Maui.Controls;
 using System;
 
 namespace BibliothequariaFrontend.Pages
@@ -32,5 +33,16 @@ namespace BibliothequariaFrontend.Pages
             await Shell.Current.GoToAsync("//settings");
         }
 
+        private void OnProfileTapped(object sender, EventArgs e)
+        {
+            // Show the popup anchored to the current page
+            this.ShowPopup(new BibliothequariaFrontend.Controls.ProfileMenuPopup());
+        }
+
+        private void OnAvatarTapped(object sender, EventArgs e)
+        {
+            
+            this.ShowPopup(new BibliothequariaFrontend.Controls.ProfileMenuPopup());
+        }
     }
 }

@@ -2,6 +2,7 @@
 <ContentPage
   xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+  xmlns:controls="clr-namespace:BibliothequariaFrontend.Controls"
   x:Class="BibliothequariaFrontend.Pages.Dashboard"
   BackgroundColor="#4A4646"
   Shell.NavBarIsVisible="False"
@@ -156,12 +157,15 @@ VerticalOptions="Center" />
                 </StackLayout>
 
                 <Image
-          Grid.Column="1"
-          Source="pfp.png"
-          HeightRequest="50"
-          WidthRequest="50"
-          HorizontalOptions="End"
-          VerticalOptions="Center" />
+    Source="pfp.png"
+    HeightRequest="50"
+    WidthRequest="50"
+    HorizontalOptions="End"
+    VerticalOptions="Center">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="OnAvatarTapped" />
+                    </Image.GestureRecognizers>
+                </Image>
             </Grid>
 
             <!-- Cards -->
