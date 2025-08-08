@@ -72,5 +72,22 @@
         </ShellContent.ContentTemplate>
     </ShellContent>
 
+    <!--Search route-->
+    <ShellContent Route="search">
+        <ShellContent.ContentTemplate>
+            <DataTemplate>
+                <pages:Search />
+            </DataTemplate>
+        </ShellContent.ContentTemplate>
+    </ShellContent>
+    
+    <!--Settings route-->
+    <ShellContent Route="settings">
+        <ShellContent.ContentTemplate>
+            <DataTemplate>
+                <pages:Settings />
+            </DataTemplate>
+        </ShellContent.ContentTemplate>
+    </ShellContent>
 
 </Shell>

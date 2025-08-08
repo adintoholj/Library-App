@@ -101,21 +101,25 @@
 
             </StackLayout>
 
-            <!-- Settings -->
+            <!-- Row 2: Settings (tappable) -->
             <StackLayout
-        Grid.Row="2"
-        Orientation="Horizontal"
-        Spacing="15"
-        VerticalOptions="Center"
-        Padding="10,0,0,0">
+  Grid.Row="2"
+  Orientation="Horizontal"
+  Spacing="15"
+  VerticalOptions="Center"
+  Padding="10,0,0,0">
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnSettingsTapped" />
+                </StackLayout.GestureRecognizers>
                 <Image Source="settings.png" HeightRequest="24" WidthRequest="24" />
                 <Label
-          Text="Settings"
-          FontFamily="PoppinsBold"
-          FontSize="18"
-          TextColor="Black"
-          VerticalOptions="Center" />
+    Text="Settings"
+    FontFamily="PoppinsBold"
+    FontSize="18"
+    TextColor="Black"
+    VerticalOptions="Center" />
             </StackLayout>
+
         </Grid>
 
         <!-- MAIN CONTENT -->

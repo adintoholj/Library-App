@@ -1,26 +1,16 @@
 using Microsoft.Maui.Controls;
 using System;
-using System.Windows.Input;
 
 namespace BibliothequariaFrontend.Pages
 {
-    public partial class Search : ContentPage
+    public partial class Settings : ContentPage
     {
-        public ICommand PerformSearchCommand { get; }
-
-        public Search()
+        public Settings()
         {
             InitializeComponent();
-
-            // stub: wire to your real search logic
-            PerformSearchCommand = new Command<string>(query =>
-            {
-                // TODO: run your search and bind results
-            });
-
-            BindingContext = this;
         }
 
+        // NAVIGATION HANDLERS
         private async void OnDashboardTapped(object sender, EventArgs e)
             => await Shell.Current.GoToAsync("//dashboard");
 
@@ -30,11 +20,10 @@ namespace BibliothequariaFrontend.Pages
         private async void OnBookOperationsTapped(object sender, EventArgs e)
             => await Shell.Current.GoToAsync("//bookoperations");
 
-        private async void OnSettingsTapped(object sender, EventArgs e)
-        {
-            // navigate to your SettingsPage
-            await Shell.Current.GoToAsync("//settings");
-        }
+        private async void OnSearchTapped(object sender, EventArgs e)
+            => await Shell.Current.GoToAsync("//search");
 
+        private async void OnSettingsTapped(object sender, EventArgs e)
+            => await Shell.Current.GoToAsync("//settings");
     }
 }

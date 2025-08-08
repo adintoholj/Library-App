@@ -26,5 +26,11 @@ namespace BibliothequariaFrontend.Pages
             await Shell.Current.GoToAsync("//search");
         }
 
+        private async void OnSettingsTapped(object sender, EventArgs e)
+        {
+            // navigate to your SettingsPage
+            await Shell.Current.GoToAsync("//settings");
+        }
+
     }
 }

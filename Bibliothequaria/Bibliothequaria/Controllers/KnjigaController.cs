@@ -1,8 +1,7 @@
 ﻿using Bibliothequaria.Models;
 using Bibliothequaria.Models.DTOs;
 using Microsoft.AspNetCore.Mvc;
-
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+using Microsoft.EntityFrameworkCore;    // for *Async extensions
 
 namespace Bibliothequaria.Controllers
 {
@@ -10,90 +9,95 @@ namespace Bibliothequaria.Controllers
     [ApiController]
     public class KnjigaController : ControllerBase
     {
-        BibliothequariaContext db = new BibliothequariaContext();
+        private readonly BibliothequariaContext db = new();
 
         [HttpGet]
-        public async Task<IActionResult> ListaSvihKnjiga() //za select svega
+        public async Task<IActionResult> ListaSvihKnjiga()
         {
-            List<Knjiga> podaci = db.Knjigas.OrderByDescending(r => r.Id).ToList();
+            // ← await the async ToList
+            var podaci = await db.Knjigas
+                                 .OrderByDescending(r => r.Id)
+                                 .ToListAsync();
             return Ok(podaci);
         }
 
         [HttpGet]
-        public async Task<IActionResult> PrikaziKnjigeNaslov(string parametar) //za select po naslovu, jedna knjiga
+        public async Task<IActionResult> PrikaziKnjigeNaslov(string parametar)
         {
-            Knjiga rezultat = db.Knjigas.Where(r => r.Zanr.Contains(parametar)).FirstOrDefault();
-            //select * from  where....
+            // ← await the async FirstOrDefault
+            var rezultat = await db.Knjigas
+                                   .Where(r => r.Zanr.Contains(parametar))
+                                   .FirstOrDefaultAsync();
             return Ok(rezultat);
         }
 
         [HttpGet]
-        public async Task<IActionResult> PrikaziKnjigeAutor(string parametar) //za select po autoru
+        public async Task<IActionResult> PrikaziKnjigeAutor(string parametar)
         {
-            List<Knjiga> rezultat = db.Knjigas.Where(r => r.Autor.Contains(parametar)).ToList();
-            //select * from  where....
+            // ← await the async ToList
+            var rezultat = await db.Knjigas
+                                   .Where(r => r.Autor.Contains(parametar))
+                                   .ToListAsync();
             return Ok(rezultat);
         }
 
         [HttpGet]
-        public async Task<IActionResult> PrikaziKnjigeZanr(string parametar) //za select po zanru
+        public async Task<IActionResult> PrikaziKnjigeZanr(string parametar)
         {
-            List<Knjiga> rezultat = db.Knjigas.Where(r => r.Zanr.Contains(parametar)).ToList();
-            //select * from  where....
+            // ← await the async ToList
+            var rezultat = await db.Knjigas
+                                   .Where(r => r.Zanr.Contains(parametar))
+                                   .ToListAsync();
             return Ok(rezultat);
         }
 
         [HttpPost]
-        public async Task<IActionResult> unesi([FromBody] KnjigaCreateDTO dto)     //za unos novog podatka
+        public async Task<IActionResult> unesi([FromBody] KnjigaCreateDTO dto)
         {
             var knjiga = new Knjiga
             {
-                Naslov = dto.Naslov,
-                Autor = dto.Autor,
-                Zanr = dto.Zanr,
-                BrojStrana = dto.BrojStrana
+                Naslov    = dto.Naslov,
+                Autor     = dto.Autor,
+                Zanr      = dto.Zanr,
+                BrojStrana= dto.BrojStrana
             };
 
-            db.Add(knjiga);
-            await db.SaveChangesAsync();
+            // ← you can also use AddAsync
+            await db.Knjigas.AddAsync(knjiga);
+            await db.SaveChangesAsync();           // ← await here
             return Ok(knjiga);
         }
 
         [HttpDelete("{parametar:int}")]
-        public IActionResult Obrisi(int parametar)  //za brisanje po ID
+        public async Task<IActionResult> Obrisi(int parametar)
         {
-            Knjiga rezultat = db.Knjigas.Where(r => r.Id == parametar).FirstOrDefault();
-            //select * from  where....
+            // ← await the async find
+            var rezultat = await db.Knjigas
+                                   .FirstOrDefaultAsync(r => r.Id == parametar);
             if (rezultat == null)
-            { return NotFound($"Podatak sa Id = {parametar} nije pronadjen"); }
-            else
-            {
-                db.Remove(rezultat);
-                db.SaveChanges();
-            }
+                return NotFound($"Podatak sa Id = {parametar} nije pronadjen");
+
+            db.Knjigas.Remove(rezultat);
+            await db.SaveChangesAsync();           // ← await here
             return Ok(parametar);
         }
 
-        //update
-
         [HttpPost]
-
-        public async Task<IActionResult> Izmijeni([FromBody] KnjigaUpdateDTO podaci) //za izmjenu
+        public async Task<IActionResult> Izmijeni([FromBody] KnjigaUpdateDTO podaci)
         {
-            Knjiga rezultat = db.Knjigas.Where(r => r.Id == podaci.Id).FirstOrDefault();
-            //select * from  where....
+            // ← await the async find
+            var rezultat = await db.Knjigas
+                                   .FirstOrDefaultAsync(r => r.Id == podaci.Id);
             if (rezultat == null)
-            { return NotFound($"Podatak sa Id = {podaci.Id} nije pronadjen"); }
-            else
-            {
-                rezultat.Naslov = podaci.Naslov;
-                rezultat.Autor = podaci.Autor;
-                rezultat.Zanr = podaci.Zanr;
-                rezultat.BrojStrana = podaci.BrojStrana;
-                db.Update(rezultat);
-                await db.SaveChangesAsync();
-            }
-            //logika je da ukucas id radnika kojem hoces da izmijenis podatke i tako mijenjas
+                return NotFound($"Podatak sa Id = {podaci.Id} nije pronadjen");
+
+            rezultat.Naslov     = podaci.Naslov;
+            rezultat.Autor      = podaci.Autor;
+            rezultat.Zanr       = podaci.Zanr;
+            rezultat.BrojStrana = podaci.BrojStrana;
+
+            db.Knjigas.Update(rezultat);
+            await db.SaveChangesAsync();           // ← await here
             return Ok(rezultat);
         }
     }
