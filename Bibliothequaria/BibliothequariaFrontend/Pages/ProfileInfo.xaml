@@ -1,12 +1,120 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="BibliothequariaFrontend.Pages.ProfileInfo"
-             Title="ProfileInfo">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+<ContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:BibliothequariaFrontend.Controls"
+    x:Class="BibliothequariaFrontend.Pages.ProfileInfo"
+    BackgroundColor="#4A4646"
+    Shell.NavBarIsVisible="False"
+    Padding="20">
+
+    <Grid RowDefinitions="Auto, Auto, *, Auto">
+
+        <!-- Row 0: Logo, Title, Back Arrow -->
+        <Grid Grid.Row="0" ColumnDefinitions="Auto,*,Auto">
+            <Image
+        Source="bibliothequarialogo.png"
+        HeightRequest="50"
+        HorizontalOptions="Start"
+        VerticalOptions="Center" />
+
+            <Label
+        Grid.Column="1"
+        Text="Profile information"
+        FontFamily="PoppinsBold"
+        FontSize="24"
+        TextColor="White"
+        HorizontalOptions="Center"
+        VerticalOptions="Center" />
+
+            <Image
+        Grid.Column="2"
+        Source="backarrow.png"
+        HeightRequest="30"
+        WidthRequest="30"
+        HorizontalOptions="End"
+        VerticalOptions="Center">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnBackArrowTapped" />
+                </Image.GestureRecognizers>
+            </Image>
+        </Grid>
+
+        <!-- Row 1: Subtitle -->
+        <Label
+      Grid.Row="1"
+      FontFamily="PoppinsRegular"
+      FontSize="16"
+      TextColor="White"
+      HorizontalOptions="Center">
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span Text="Customize " TextColor="#FDBF1D" />
+                    <Span Text="and edit your profile information" />
+                </FormattedString>
+            </Label.FormattedText>
+        </Label>
+
+        <!-- Row 2: Profile Form -->
+        <Frame
+      Grid.Row="2"
+      BackgroundColor="#DBCC99"
+      CornerRadius="8"
+      Padding="20"
+      HasShadow="False">
+            <VerticalStackLayout Spacing="20">
+
+                <!-- Icon -->
+                <Image
+          Source="profileninja.png"
+          HeightRequest="40"
+          WidthRequest="40"
+          HorizontalOptions="Start" />
+
+                <!-- Name field -->
+                <Entry
+          Text="Adin, ???"
+          FontFamily="PoppinsRegular"
+          FontSize="14"
+          TextColor="Black"
+          BackgroundColor="Transparent" />
+
+                <!-- Second field (dotted placeholder) -->
+                <Entry
+          Text="........................................"
+          FontFamily="PoppinsRegular"
+          FontSize="14"
+          TextColor="Black"
+          BackgroundColor="Transparent" />
+
+                <!-- Email -->
+                <Entry
+          Text="adin@hotmail.com"
+          FontFamily="PoppinsRegular"
+          FontSize="14"
+          TextColor="Black"
+          BackgroundColor="Transparent" />
+
+                <!-- Phone -->
+                <Entry
+          Text="062123456"
+          FontFamily="PoppinsRegular"
+          FontSize="14"
+          TextColor="Black"
+          BackgroundColor="Transparent" />
+
+            </VerticalStackLayout>
+        </Frame>
+
+        <!-- Row 3: Save Changes Button -->
+        <HorizontalStackLayout
+      Grid.Row="3"
+      HorizontalOptions="End"
+      Padding="0,10,0,0">
+            <controls:BrownButtonStart
+        Text="Save changes"
+        Command="{Binding SaveCommand}" />
+        </HorizontalStackLayout>
+
+    </Grid>
 </ContentPage>

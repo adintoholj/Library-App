@@ -45,7 +45,7 @@ namespace BibliothequariaFrontend.Pages
 
         private void OnAvatarTapped(object sender, EventArgs e)
         {
-
+            
             this.ShowPopup(new BibliothequariaFrontend.Controls.ProfileMenuPopup());
         }
     }

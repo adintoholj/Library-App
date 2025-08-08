@@ -16,5 +16,12 @@ namespace BibliothequariaFrontend.Controls
             await Shell.Current.GoToAsync("//profileinfo");
             Close();   // dismiss the popup
         }
+
+        private async void OnBackArrowTapped(object sender, EventArgs e)
+        {
+            // pops back to the previous page in the same ShellSection
+            await Shell.Current.GoToAsync("..");
+        }
+
     }
 }
