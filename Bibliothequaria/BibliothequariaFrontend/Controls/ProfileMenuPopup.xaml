@@ -13,7 +13,7 @@
         HasShadow="True"
         Padding="16"
         WidthRequest="300"
-        HeightRequest="200">
+        HeightRequest="250">
 
             <VerticalStackLayout Spacing="12">
 
@@ -72,9 +72,9 @@
           Spacing="20"
           HorizontalOptions="End"
           VerticalOptions="End">
-                    <Image Source="support.png"  HeightRequest="24" WidthRequest="24" />
-                    <Image Source="linkedin.png" HeightRequest="24" WidthRequest="24" />
-                    <Image Source="mail.png"    HeightRequest="24" WidthRequest="24" />
+                    <Image Source="support.png"  HeightRequest="18" WidthRequest="18" />
+                    <Image Source="linkedin.png" HeightRequest="18" WidthRequest="18" />
+                    <Image Source="mail.png"    HeightRequest="18" WidthRequest="18" />
                 </HorizontalStackLayout>
 
             </VerticalStackLayout>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    x:Class="BibliothequariaFrontend.Controls.AddMemberPopup">
+
+    <Frame BackgroundColor="#DBCC99"
+         CornerRadius="12"
+         Padding="20"
+         HasShadow="False">
+
+        <VerticalStackLayout Spacing="16" WidthRequest="360">
+            <Label Text="Add member"
+             FontFamily="PoppinsBold"
+             FontSize="20"
+             TextColor="Black" />
+
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="12">
+
+                <!-- First name -->
+                <Border BackgroundColor="White" Padding="10,6">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="8" />
+                    </Border.StrokeShape>
+                    <Entry x:Name="FirstNameEntry"
+                 Placeholder="First name"
+                 FontFamily="PoppinsRegular"
+                 TextColor="Black"
+                 PlaceholderColor="#666"
+                 BackgroundColor="Transparent" />
+                </Border>
+
+                <!-- Last name -->
+                <Border Grid.Column="1" BackgroundColor="White" Padding="10,6">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="8" />
+                    </Border.StrokeShape>
+                    <Entry x:Name="LastNameEntry"
+                 Placeholder="Last name"
+                 FontFamily="PoppinsRegular"
+                 TextColor="Black"
+                 PlaceholderColor="#666"
+                 BackgroundColor="Transparent" />
+                </Border>
+
+            </Grid>
+
+            <Label x:Name="ErrorLabel"
+             IsVisible="False"
+             Text="Please fill in both fields."
+             TextColor="#B00020"
+             FontFamily="PoppinsRegular"
+             FontSize="12" />
+
+            <Grid ColumnDefinitions="*,*" ColumnSpacing="12" Margin="0,8,0,0">
+                <Button Text="Cancel"
+                Clicked="OnCancel"
+                BackgroundColor="Transparent"
+                TextColor="#3A3428"
+                FontFamily="PoppinsBold"
+                HeightRequest="44"
+                CornerRadius="8"
+                BorderColor="#3A3428"
+                BorderWidth="1"/>
+
+                <Button Grid.Column="1"
+                Text="Add user"
+                Clicked="OnAdd"
+                BackgroundColor="#665A44"
+                TextColor="White"
+                FontFamily="PoppinsBold"
+                HeightRequest="44"
+                CornerRadius="8"/>
+            </Grid>
+        </VerticalStackLayout>
+    </Frame>
+</toolkit:Popup>

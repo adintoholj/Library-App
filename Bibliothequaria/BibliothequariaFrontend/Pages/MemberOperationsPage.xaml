@@ -363,10 +363,11 @@
           Text="Change member status"
           Command="{Binding ChangeStatusCommand}" />
                 <controls:GrayButtonControl
-          Text="Add user"
+                    Text="Add user"
           Command="{Binding AddUserCommand}" />
             </StackLayout>
 
         </Grid>
     </Grid>
+    
 </ContentPage>

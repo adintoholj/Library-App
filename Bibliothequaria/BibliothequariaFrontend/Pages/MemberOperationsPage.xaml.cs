@@ -1,7 +1,9 @@
 ﻿using CommunityToolkit.Maui.Views;
 using Microsoft.Maui.Controls;
 using System;
+using System.Threading.Tasks;
 using System.Windows.Input;
+using BibliothequariaFrontend.Controls;
 
 namespace BibliothequariaFrontend.Pages
 {
@@ -15,11 +17,28 @@ namespace BibliothequariaFrontend.Pages
         {
             InitializeComponent();
 
-            SeeInChargeCommand = new Command(() => { /* … */ });
-            ChangeStatusCommand = new Command(() => { /* … */ });
-            AddUserCommand = new Command(() => { /* … */ });
+            SeeInChargeCommand = new Command(() => { /* TODO */ });
+            ChangeStatusCommand = new Command(() => { /* TODO */ });
+
+            // ⇩ Open the popup and handle the result
+            AddUserCommand = new Command(async () => await ShowAddMemberPopupAsync());
 
             BindingContext = this;
+        }
+
+        private async Task ShowAddMemberPopupAsync()
+        {
+            var popup = new AddMemberPopup();
+            var result = await this.ShowPopupAsync(popup) as AddMemberResult;
+
+            if (result is not null)
+            {
+                // TODO: call your API/EF endpoint to create the member.
+                // For now, just confirm.
+                await DisplayAlert("Member added",
+                    $"{result.FirstName} {result.LastName} was captured.",
+                    "OK");
+            }
         }
 
         private async void OnDashboardTapped(object sender, EventArgs e)
@@ -27,7 +46,6 @@ namespace BibliothequariaFrontend.Pages
             await Shell.Current.GoToAsync("//dashboard");
         }
 
-        // ⇩ New handler ⇩
         private async void OnBookOperationsTapped(object sender, EventArgs e)
         {
             await Shell.Current.GoToAsync("//bookoperations");
@@ -40,20 +58,17 @@ namespace BibliothequariaFrontend.Pages
 
         private async void OnSettingsTapped(object sender, EventArgs e)
         {
-            // navigate to your SettingsPage
             await Shell.Current.GoToAsync("//settings");
         }
 
         private void OnProfileTapped(object sender, EventArgs e)
         {
-            // Show the popup anchored to the current page
-            this.ShowPopup(new BibliothequariaFrontend.Controls.ProfileMenuPopup());
+            this.ShowPopup(new ProfileMenuPopup());
         }
 
         private void OnAvatarTapped(object sender, EventArgs e)
         {
-
-            this.ShowPopup(new BibliothequariaFrontend.Controls.ProfileMenuPopup());
+            this.ShowPopup(new ProfileMenuPopup());
         }
     }
 }
