@@ -1,5 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
 using CommunityToolkit.Maui;
+using BibliothequariaFrontend.Services;
+using System.Net.Http;  
+
 
 namespace BibliothequariaFrontend
 {
@@ -18,12 +21,34 @@ namespace BibliothequariaFrontend
                     fonts.AddFont("Poppins-Bold.ttf", "PoppinsBold");
                     fonts.AddFont("Poppins-Regular.ttf", "PoppinsRegular");
                 });
+            // ---- API wiring ----
+            // If your backend runs on HTTP http://localhost:5195 (see Bibliothequaria.http), use this:
+            builder.Services.AddSingleton(new HttpClient
+            {
+                BaseAddress = new Uri("http://localhost:5195/")  // desktop uses localhost
+            });
 
+
+
+            // Our API wrapper
+            builder.Services.AddSingleton<MemberService>();
 #if DEBUG
-    		builder.Logging.AddDebug();
+            builder.Logging.AddDebug();
 #endif
 
-            return builder.Build();
+            var app = builder.Build();
+
+            // Allow pages to resolve services via a helper
+            ServiceHelper.Services = app.Services;
+
+            return app;
         }
+    }
+
+    public static class ServiceHelper
+    {
+        public static IServiceProvider Services { get; set; } = default!;
+        public static T GetRequiredService<T>() where T : notnull
+            => Services.GetRequiredService<T>();
     }
 }

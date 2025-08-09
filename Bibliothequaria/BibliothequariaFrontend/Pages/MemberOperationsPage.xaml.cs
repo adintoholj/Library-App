@@ -4,6 +4,9 @@ using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using BibliothequariaFrontend.Controls;
+using BibliothequariaFrontend.Models;
+using BibliothequariaFrontend.Services;
+using System.Net.Http.Json;
 
 namespace BibliothequariaFrontend.Pages
 {
@@ -13,33 +16,65 @@ namespace BibliothequariaFrontend.Pages
         public ICommand ChangeStatusCommand { get; }
         public ICommand AddUserCommand { get; }
 
+        private readonly MemberService _memberService;
+
         public MemberOperationsPage()
         {
             InitializeComponent();
 
-            SeeInChargeCommand = new Command(() => { /* TODO */ });
-            ChangeStatusCommand = new Command(() => { /* TODO */ });
+            _memberService = ServiceHelper.GetRequiredService<MemberService>();
 
-            // ⇩ Open the popup and handle the result
+            SeeInChargeCommand = new Command(async () =>
+            {
+                await DisplayAlert("Info", "Not implemented yet.", "OK");
+            });
+
+            ChangeStatusCommand = new Command(async () =>
+            {
+                await DisplayAlert("Info", "Not implemented yet.", "OK");
+            });
+
+            // Open the popup and handle the result
             AddUserCommand = new Command(async () => await ShowAddMemberPopupAsync());
 
             BindingContext = this;
         }
+
 
         private async Task ShowAddMemberPopupAsync()
         {
             var popup = new AddMemberPopup();
             var result = await this.ShowPopupAsync(popup) as AddMemberResult;
 
-            if (result is not null)
+            if (result is null) return;
+
+            var dto = new ClanCreateDTO
             {
-                // TODO: call your API/EF endpoint to create the member.
-                // For now, just confirm.
+                Ime = result.FirstName,
+                Prezime = result.LastName,
+                DatumUclane = DateOnly.FromDateTime(DateTime.Now)
+            };
+
+            try
+            {
+                
+
+                // Make the call
+                var created = await _memberService.CreateAsync(dto);
+
                 await DisplayAlert("Member added",
-                    $"{result.FirstName} {result.LastName} was captured.",
+                    $"{created.Ime} {created.Prezime} (ID {created.Id}) added.",
                     "OK");
+
+                // TODO: trigger a members list refresh here if you have one
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Greška", ex.Message, "OK");
             }
         }
+
+
 
         private async void OnDashboardTapped(object sender, EventArgs e)
         {

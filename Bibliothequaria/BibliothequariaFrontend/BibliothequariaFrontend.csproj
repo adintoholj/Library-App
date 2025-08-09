@@ -64,13 +64,10 @@
 
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Maui" Version="8.0.1" />
+		<PackageReference Include="Microsoft.Extensions.Http" Version="8.0.1" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.1" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Models\" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -83,9 +80,6 @@
 	  <MauiXaml Update="Controls\AddMemberPopup.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Controls\AddUserPanel.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	  <MauiXaml Update="Controls\BrownButtonStart.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -95,6 +89,10 @@
 	  <MauiXaml Update="Controls\ProfileMenuPopup.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+		<MauiXaml Update="Controls\AddMemberPopup.xaml">
+    <Generator>MSBuild:Compile</Generator>
+  </MauiXaml>			
+  
 	  <MauiXaml Update="Pages\BookOperations.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
