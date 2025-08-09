@@ -57,7 +57,7 @@ namespace BibliothequariaFrontend.Pages
 
             try
             {
-                
+
 
                 // Make the call
                 var created = await _memberService.CreateAsync(dto);
