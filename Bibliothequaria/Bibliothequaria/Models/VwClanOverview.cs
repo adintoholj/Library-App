@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Bibliothequaria.Models;
 
-public partial class Clan
+public partial class VwClanOverview
 {
     public int Id { get; set; }
 
@@ -13,9 +13,7 @@ public partial class Clan
 
     public DateOnly DatumUclane { get; set; }
 
-    public bool? Status { get; set; }
-
     public DateOnly? DatumIsteka { get; set; }
 
-    public virtual ICollection<Transakcija> Transakcijas { get; set; } = new List<Transakcija>();
+    public int? BorrowedCount { get; set; }
 }

@@ -73,5 +73,28 @@ namespace Bibliothequaria.Controllers
             }
             return Ok(rezultat);
         }
+        
+        [HttpGet("pregled")]
+        public async Task<ActionResult<IEnumerable<ClanOverviewDTOcs>>> Pregled()
+        {
+            // Group-join active loans (DatumVracanja IS NULL) and count per member
+            var query =
+                from c in db.Clans.AsNoTracking()
+                join t in db.Transakcijas.AsNoTracking().Where(x => x.DatumVracanja == null)
+                    on c.Id equals t.Idclana into g
+                select new ClanOverviewDTOcs
+                {
+                    Id = c.Id,
+                    Ime = c.Ime,
+                    Prezime = c.Prezime,
+                    DatumUclane = c.DatumUclane, 
+                    DatumIsteka = c.DatumIsteka,    // uses computed column
+                    BorrowedCount = g.Count()
+                };
+
+            var list = await query.OrderBy(x => x.Id).ToListAsync();
+            return Ok(list);
+        }
+        
     }
 }

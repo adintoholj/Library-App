@@ -23,6 +23,8 @@ public partial class BibliothequariaContext : DbContext
 
     public virtual DbSet<Transakcija> Transakcijas { get; set; }
 
+    public virtual DbSet<VwClanOverview> VwClanOverviews { get; set; }
+
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseSqlServer("Server=DESKTOP-OV8R09A\\SQLEXPRESS;Database=BIBLIOTHEQUARIA;Trusted_Connection=True;TrustServerCertificate=True;");
@@ -36,6 +38,7 @@ public partial class BibliothequariaContext : DbContext
             entity.ToTable("Clan");
 
             entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.DatumIsteka).HasComputedColumnSql("(CONVERT([date],dateadd(month,(3),[DatumUclane])))", true);
             entity.Property(e => e.Ime).HasMaxLength(30);
             entity.Property(e => e.Prezime).HasMaxLength(30);
         });
@@ -92,6 +95,17 @@ public partial class BibliothequariaContext : DbContext
                 .HasForeignKey(d => d.Iduposlenika)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__Transakci__IDUpo__403A8C7D");
+        });
+
+        modelBuilder.Entity<VwClanOverview>(entity =>
+        {
+            entity
+                .HasNoKey()
+                .ToView("vw_ClanOverview");
+
+            entity.Property(e => e.Id).HasColumnName("ID");
+            entity.Property(e => e.Ime).HasMaxLength(30);
+            entity.Property(e => e.Prezime).HasMaxLength(30);
         });
 
         OnModelCreatingPartial(modelBuilder);
