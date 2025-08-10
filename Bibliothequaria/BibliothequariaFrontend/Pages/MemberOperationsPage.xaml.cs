@@ -62,7 +62,7 @@ namespace BibliothequariaFrontend.Pages
 
                 // show ONLY active in the main grid (treat null as active)
                 Members.Clear();
-                foreach (var m in _allMembers.Where(m => m.Status ?? true))
+                foreach (var m in _allMembers.Where(m => m.Status))
                     Members.Add(m);
             }
             catch (Exception ex)
@@ -151,9 +151,10 @@ namespace BibliothequariaFrontend.Pages
         private void ApplyMembersFilter()
         {
             Members.Clear();
-            foreach (var m in _allMembers.Where(m => m.Status ?? true)) // show true or null
+            foreach (var m in _allMembers.Where(m => m.Status))   // <-- just m.Status
                 Members.Add(m);
         }
+
 
 
 

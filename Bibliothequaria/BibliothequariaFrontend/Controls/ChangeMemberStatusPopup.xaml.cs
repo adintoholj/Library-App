@@ -19,13 +19,13 @@ public partial class ChangeMemberStatusPopup : Popup
         if (_members.Count > 0)
             MemberPicker.SelectedIndex = 0;
 
-        StatusSwitch.IsToggled = (_members.Count > 0) ? (_members[0].Status ?? true) : false;
+        StatusSwitch.IsToggled = (_members.Count > 0) ? (_members[0].Status) : false; //CAHNGED ??
         UpdateStatusText();
 
         MemberPicker.SelectedIndexChanged += (_, __) =>
         {
             if (MemberPicker.SelectedItem is ClanOverviewDTO sel)
-                StatusSwitch.IsToggled = sel.Status ?? true; // reflect current status
+                StatusSwitch.IsToggled = sel.Status; // reflect current status
             UpdateStatusText();
         };
     }

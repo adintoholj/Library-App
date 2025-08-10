@@ -92,7 +92,8 @@ namespace Bibliothequaria.Controllers
                     Prezime = c.Prezime,
                     DatumUclane = c.DatumUclane, 
                     DatumIsteka = c.DatumIsteka,    // uses computed column
-                    BorrowedCount = g.Count()
+                    BorrowedCount = g.Count(),
+                    Status = c.Status ?? false
                 };
 
             var list = await query.OrderBy(x => x.Id).ToListAsync();
