@@ -172,7 +172,7 @@ VerticalOptions="Center" />
             <Grid
         Grid.Row="1"
         Margin="0,-180,0,10"
-        ColumnDefinitions="407,404"
+        ColumnDefinitions="607,404"
         RowDefinitions="778,370"
         ColumnSpacing="20"
         RowSpacing="20">
@@ -186,7 +186,7 @@ VerticalOptions="Center" />
           CornerRadius="8"
           Padding="20"
           HeightRequest="778"
-          WidthRequest="407"
+          WidthRequest="607"
           HasShadow="False">
                     <StackLayout Spacing="20">
                         <!-- Title -->
