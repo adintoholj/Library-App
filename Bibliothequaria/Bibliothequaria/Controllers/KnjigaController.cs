@@ -100,5 +100,19 @@ namespace Bibliothequaria.Controllers
             await db.SaveChangesAsync();           // ← await here
             return Ok(rezultat);
         }
+
+        [HttpPut] // Route: api/Knjiga/ChangeStatus
+        public async Task<IActionResult> ChangeStatus([FromBody] KnjigaStatusDTO dto)
+        {
+            if (dto is null) return BadRequest();
+
+            var knjiga = await db.Knjigas.FindAsync(dto.Id);
+            if (knjiga is null) return NotFound($"Knjiga Id={dto.Id} nije pronađena.");
+
+            knjiga.Slobodna = dto.Slobodna;   // entity is bool?; assigning bool is fine
+            await db.SaveChangesAsync();
+
+            return NoContent();
+        }
     }
 }
