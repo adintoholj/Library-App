@@ -166,188 +166,73 @@
             </Grid>
 
             <!-- Table container -->
-            <Frame
-        Grid.Row="1"
-        BackgroundColor="#DBCC99"
-        CornerRadius="8"
-        Padding="10"
-        HasShadow="False">
+            <Frame Grid.Row="1"
+       BackgroundColor="#DBCC99"
+       CornerRadius="8"
+       Padding="10"
+       HasShadow="False">
 
                 <ScrollView>
-                    <Grid
-            ColumnDefinitions="2*,*,*,*"
-            RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto,Auto"
-            ColumnSpacing="5"
-            RowSpacing="20"
-            VerticalOptions="Start">
+                    <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="*">
 
-                        <!-- Header row -->
-                        <Label
-              Grid.Row="0" Grid.Column="0"
-              Text="Name &amp; Surname"
-              FontFamily="PoppinsBold"
-              FontSize="14"
-              TextColor="Black" 
-               Margin="70,0,0,0"/>
-                        <Label
-              Grid.Row="0" Grid.Column="1"
-              Text="Date added"
-              FontFamily="PoppinsBold"
-              FontSize="14"
-              TextColor="Black" />
-                        <Label
-              Grid.Row="0" Grid.Column="2"
-              Text="Date of expiry"
-              FontFamily="PoppinsBold"
-              FontSize="14"
-              TextColor="Black" />
-                        <Label
-              Grid.Row="0" Grid.Column="3"
-              Text="Currently borrowed books"
-              FontFamily="PoppinsBold"
-              FontSize="14"
-              TextColor="Black" />
+                        <!-- Header row (unchanged) -->
+                        <Grid Grid.Row="0" ColumnDefinitions="2*,*,*,*" ColumnSpacing="5" Padding="0,0,10,8">
+                            <Label Grid.Column="0" Text="Name &amp; Surname" FontFamily="PoppinsBold" FontSize="14" TextColor="Black" Margin="70,0,0,0"/>
+                            <Label Grid.Column="1" Text="Date added"        FontFamily="PoppinsBold" FontSize="14" TextColor="Black"/>
+                            <Label Grid.Column="2" Text="Date of expiry"    FontFamily="PoppinsBold" FontSize="14" TextColor="Black"/>
+                            <Label Grid.Column="3" Text="Currently borrowed books" FontFamily="PoppinsBold" FontSize="14" TextColor="Black"/>
+                        </Grid>
 
-                        <!-- Sample data rows -->
-                        
-                        <Image
-              Grid.Row="1" Grid.Column="0"
-              Source="littlemember.png"
-              HeightRequest="20"
-              WidthRequest="20"
-              VerticalOptions="Center" />
-                        <Label
-              Grid.Row="1" Grid.Column="0"
-              Text="Mary Jane"
-              FontFamily="PoppinsRegular"
-              FontSize="14"
-              TextColor="Black"
-              Margin="30,0,0,0" />
+                        <!-- Live rows -->
+                        <CollectionView Grid.Row="1"
+                      ItemsSource="{Binding Members}"
+                      SelectionMode="None"
+                      Margin="0,6,0,0">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid ColumnDefinitions="2*,*,*,*" ColumnSpacing="5" Padding="0,10">
+                                        <!-- Column 0: icon + full name -->
+                                        <Grid Grid.Column="0" ColumnDefinitions="Auto,*" ColumnSpacing="10">
+                                            <Image Source="littlemember.png" HeightRequest="20" WidthRequest="20" VerticalOptions="Center" Margin="190,0,0,0"/>
+                                            <Label Text="{Binding FullName}"
+                       FontFamily="PoppinsRegular"
+                       FontSize="14"
+                       TextColor="Black"
+                       VerticalOptions="Center"/>
+                                        </Grid>
 
-                        
-                        <Image
-              Grid.Row="2" Grid.Column="0"
-              Source="littlemember.png"
-              HeightRequest="20"
-              WidthRequest="20"
-              VerticalOptions="Center" />
-                        <Label
-              Grid.Row="2" Grid.Column="0"
-              Text="Tom Miller"
-              FontFamily="PoppinsRegular"
-              FontSize="14"
-              TextColor="Black"
-              Margin="30,0,0,0" />
+                                        <!-- Column 1: Date added -->
+                                        <Label Grid.Column="1"
+                     Text="{Binding DatumUclaneDisplay}"
+                     FontFamily="PoppinsRegular"
+                     FontSize="14"
+                     TextColor="Black"
+                     VerticalOptions="Center"/>
 
-                        
-                        <Image
-              Grid.Row="3" Grid.Column="0"
-              Source="littlemember.png"
-              HeightRequest="20"
-              WidthRequest="20"
-              VerticalOptions="Center" />
-                        <Label
-              Grid.Row="3" Grid.Column="0"
-              Text="Lisa Johnson"
-              FontFamily="PoppinsRegular"
-              FontSize="14"
-              TextColor="Black"
-              Margin="30,0,0,0" />
+                                        <!-- Column 2: Date of expiry -->
+                                        <Label Grid.Column="2"
+                     Text="{Binding DatumIstekaDisplay}"
+                     FontFamily="PoppinsRegular"
+                     FontSize="14"
+                     TextColor="Black"
+                     VerticalOptions="Center"/>
 
-                        
-                        <Image
-              Grid.Row="4" Grid.Column="0"
-              Source="littlemember.png"
-              HeightRequest="20"
-              WidthRequest="20"
-              VerticalOptions="Center" />
-                        <Label
-              Grid.Row="4" Grid.Column="0"
-              Text="Emily Brown"
-              FontFamily="PoppinsRegular"
-              FontSize="14"
-              TextColor="Black"
-              Margin="30,0,0,0" />
+                                        <!-- Column 3: Borrowed count -->
+                                        <Label Grid.Column="3"
+                     Text="{Binding BorrowedCount}"
+                     FontFamily="PoppinsRegular"
+                     FontSize="14"
+                     TextColor="Black"
+                     VerticalOptions="Center"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
 
-                        
-                        <Image
-              Grid.Row="5" Grid.Column="0"
-              Source="littlemember.png"
-              HeightRequest="20"
-              WidthRequest="20"
-              VerticalOptions="Center" />
-                        <Label
-              Grid.Row="5" Grid.Column="0"
-              Text="Sam Hall"
-              FontFamily="PoppinsRegular"
-              FontSize="14"
-              TextColor="Black"
-              Margin="30,0,0,0" />
-
-                        
-                        <Image
-              Grid.Row="6" Grid.Column="0"
-              Source="littlemember.png"
-              HeightRequest="20"
-              WidthRequest="20"
-              VerticalOptions="Center" />
-                        <Label
-              Grid.Row="6" Grid.Column="0"
-              Text="Ben Lewis"
-              FontFamily="PoppinsRegular"
-              FontSize="14"
-              TextColor="Black"
-              Margin="30,0,0,0" />
-
-                        
-                        <Image
-              Grid.Row="7" Grid.Column="0"
-              Source="littlemember.png"
-              HeightRequest="20"
-              WidthRequest="20"
-              VerticalOptions="Center" />
-                        <Label
-              Grid.Row="7" Grid.Column="0"
-              Text="Mark Wilson"
-              FontFamily="PoppinsRegular"
-              FontSize="14"
-              TextColor="Black"
-              Margin="30,0,0,0" />
-
-                        
-                        <Image
-              Grid.Row="8" Grid.Column="0"
-              Source="littlemember.png"
-              HeightRequest="20"
-              WidthRequest="20"
-              VerticalOptions="Center" />
-                        <Label
-              Grid.Row="8" Grid.Column="0"
-              Text="Megan Lewis"
-              FontFamily="PoppinsRegular"
-              FontSize="14"
-              TextColor="Black"
-              Margin="30,0,0,0" />
-
-                        
-                        <Image
-              Grid.Row="9" Grid.Column="0"
-              Source="littlemember.png"
-              HeightRequest="20"
-              WidthRequest="20"
-              VerticalOptions="Center" />
-                        <Label
-              Grid.Row="9" Grid.Column="0"
-              Text="Laura Clark"
-              FontFamily="PoppinsRegular"
-              FontSize="14"
-              TextColor="Black"
-              Margin="30,0,0,0" />
-
-                        <!-- Empty cells: the other 3 columns are left blank for future data -->
                     </Grid>
                 </ScrollView>
             </Frame>
+
 
             <!-- Bottom buttons -->
             <StackLayout

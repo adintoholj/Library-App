@@ -1,12 +1,13 @@
-﻿using CommunityToolkit.Maui.Views;
-using Microsoft.Maui.Controls;
-using System;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using BibliothequariaFrontend.Controls;
+﻿using BibliothequariaFrontend.Controls;
 using BibliothequariaFrontend.Models;
 using BibliothequariaFrontend.Services;
+using CommunityToolkit.Maui.Views;
+using Microsoft.Maui.Controls;
+using System;
+using System.Collections.ObjectModel;
 using System.Net.Http.Json;
+using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace BibliothequariaFrontend.Pages
 {
@@ -17,6 +18,8 @@ namespace BibliothequariaFrontend.Pages
         public ICommand AddUserCommand { get; }
 
         private readonly MemberService _memberService;
+
+        public ObservableCollection<ClanOverviewDTO> Members { get; } = new();
 
         public MemberOperationsPage()
         {
@@ -38,6 +41,27 @@ namespace BibliothequariaFrontend.Pages
             AddUserCommand = new Command(async () => await ShowAddMemberPopupAsync());
 
             BindingContext = this;
+        }
+
+        //call the added collection
+        protected override async void OnAppearing()
+        {
+            base.OnAppearing();
+            await LoadMembersAsync();
+        }
+
+        private async Task LoadMembersAsync()
+        {
+            try
+            {
+                var list = await _memberService.GetOverviewAsync();
+                Members.Clear();
+                foreach (var m in list) Members.Add(m);
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Greška", $"Ne mogu učitati članove.\n{ex.Message}", "OK");
+            }
         }
 
 
@@ -67,6 +91,8 @@ namespace BibliothequariaFrontend.Pages
                     "OK");
 
                 // TODO: trigger a members list refresh here if you have one
+                // Todo completed
+                await LoadMembersAsync();
             }
             catch (Exception ex)
             {
@@ -74,6 +100,8 @@ namespace BibliothequariaFrontend.Pages
             }
         }
 
+
+        //end of loading real data in the rectangle
 
 
         private async void OnDashboardTapped(object sender, EventArgs e)

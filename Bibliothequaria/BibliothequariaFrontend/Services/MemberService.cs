@@ -27,4 +27,9 @@ public sealed class MemberService
         return created ?? throw new InvalidOperationException("Empty response from server.");
     }
 
+    public async Task<List<ClanOverviewDTO>> GetOverviewAsync(CancellationToken ct = default)
+    {
+        return await _http.GetFromJsonAsync<List<ClanOverviewDTO>>("api/Clan/Pregled/pregled", cancellationToken: ct)
+               ?? new List<ClanOverviewDTO>();
+    }
 }
