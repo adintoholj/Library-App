@@ -55,10 +55,14 @@ namespace BibliothequariaFrontend.Pages
             try
             {
                 var list = await _memberService.GetOverviewAsync();
-                _allMembers = list ?? new List<ClanOverviewDTO>();   // <-- fill this
 
+                // keep ALL members for the popup
+                _allMembers = list ?? new List<ClanOverviewDTO>();
+                ApplyMembersFilter();
+
+                // show ONLY active in the main grid (treat null as active)
                 Members.Clear();
-                foreach (var m in _allMembers)                        // or filter to active
+                foreach (var m in _allMembers.Where(m => m.Status ?? true))
                     Members.Add(m);
             }
             catch (Exception ex)
@@ -66,6 +70,7 @@ namespace BibliothequariaFrontend.Pages
                 await DisplayAlert("Greška", $"Ne mogu učitati članove.\n{ex.Message}", "OK");
             }
         }
+
 
 
 
@@ -110,7 +115,8 @@ namespace BibliothequariaFrontend.Pages
         //changing member status 
         private async Task ShowChangeStatusPopupAsync()
         {
-            if (_allMembers.Count == 0) await LoadMembersAsync();
+            if (_allMembers.Count == 0)
+                await LoadMembersAsync();
 
             var popup = new ChangeMemberStatusPopup(_allMembers);
             var result = await this.ShowPopupAsync(popup) as ChangeStatusResult;
@@ -119,13 +125,34 @@ namespace BibliothequariaFrontend.Pages
             try
             {
                 await _memberService.UpdateStatusAsync(result.MemberId, result.Status);
-                await LoadMembersAsync();
+
+                // ✅ update local cache & visible list immediately
+                var inAll = _allMembers.FirstOrDefault(x => x.Id == result.MemberId);
+                if (inAll != null) inAll.Status = result.Status;
+
+                var inVisible = Members.FirstOrDefault(x => x.Id == result.MemberId);
+                if (inVisible != null) inVisible.Status = result.Status;
+
+                // hide inactives right away
+                ApplyMembersFilter();
+
                 await DisplayAlert("Status changed", "Member status updated.", "OK");
+
+                // optional silent refresh from server
+                _ = LoadMembersAsync();
             }
             catch (Exception ex)
             {
                 await DisplayAlert("Greška", ex.Message, "OK");
             }
+        }
+
+
+        private void ApplyMembersFilter()
+        {
+            Members.Clear();
+            foreach (var m in _allMembers.Where(m => m.Status ?? true)) // show true or null
+                Members.Add(m);
         }
 
 
