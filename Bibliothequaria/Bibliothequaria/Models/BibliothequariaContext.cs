@@ -27,7 +27,7 @@ public partial class BibliothequariaContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
-        => optionsBuilder.UseSqlServer("Server=DESKTOP-OV8R09A\\SQLEXPRESS;Database=BIBLIOTHEQUARIA;Trusted_Connection=True;TrustServerCertificate=True;");
+        => optionsBuilder.UseSqlServer("Server=DESKTOP-OV8R09A\\SQLEXPRESS;Database=BIBLIOTHEQUARIA;Trusted_Connection=True; TrustServerCertificate=True;");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -76,10 +76,15 @@ public partial class BibliothequariaContext : DbContext
 
             entity.ToTable("Transakcija");
 
+            entity.HasIndex(e => e.Idknjige, "IX_Transakcija_Active_ByBook").HasFilter("([DatumVracanja] IS NULL)");
+
+            entity.HasIndex(e => e.Idclana, "IX_Transakcija_Active_ByMember").HasFilter("([DatumVracanja] IS NULL)");
+
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.Idclana).HasColumnName("IDClana");
             entity.Property(e => e.Idknjige).HasColumnName("IDKnjige");
             entity.Property(e => e.Iduposlenika).HasColumnName("IDUposlenika");
+            entity.Property(e => e.RokVracanja).HasComputedColumnSql("(CONVERT([date],dateadd(month,(2),[DatumPosudbe])))", true);
 
             entity.HasOne(d => d.IdclanaNavigation).WithMany(p => p.Transakcijas)
                 .HasForeignKey(d => d.Idclana)
