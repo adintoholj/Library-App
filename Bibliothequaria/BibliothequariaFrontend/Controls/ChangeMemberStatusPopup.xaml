@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    x:Class="BibliothequariaFrontend.Controls.ChangeMemberStatusPopup">
+
+    <!-- Bigger card so buttons/text are visible -->
+    <Border
+        Padding="22"
+        BackgroundColor="#DBCC99"
+        StrokeThickness="0"
+        StrokeShape="RoundRectangle 20"
+        WidthRequest="520"
+        HeightRequest="420">
+        <VerticalStackLayout Spacing="18">
+
+            <Label Text="Change member status"
+                   FontFamily="PoppinsBold"
+                   FontSize="22"
+                   TextColor="Black" />
+
+            <!-- Row 1: Pick member -->
+            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="14">
+                <Label Text="Pick a member:"
+                       FontFamily="PoppinsRegular"
+                       FontSize="16"
+                       TextColor="Black"
+                       VerticalOptions="Center" />
+                <Picker x:Name="MemberPicker"
+                        Grid.Column="1"
+                        Title="Select member"
+                        ItemDisplayBinding="{Binding FullName}"
+                        TextColor="Black"
+                        TitleColor="Black"
+                        BackgroundColor="#EADFAE"
+                        FontFamily="PoppinsRegular" />
+            </Grid>
+
+            <!-- Row 2: Status -->
+            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="14">
+                <Label Text="Set status:"
+                       FontFamily="PoppinsRegular"
+                       FontSize="16"
+                       TextColor="Black"
+                       VerticalOptions="Center" />
+                <HorizontalStackLayout Grid.Column="1" Spacing="12" VerticalOptions="Center">
+                    <Label x:Name="StatusText"
+                           Text="Inactive"
+                           FontFamily="PoppinsRegular"
+                           FontSize="16"
+                           TextColor="Black" />
+                    <Switch x:Name="StatusSwitch" Toggled="OnToggled" />
+                </HorizontalStackLayout>
+            </Grid>
+
+            <Label x:Name="ErrorLabel"
+                   Text="Please select a member."
+                   TextColor="#B00020"
+                   FontFamily="PoppinsRegular"
+                   IsVisible="False" />
+
+            <HorizontalStackLayout Spacing="12" HorizontalOptions="End" Margin="0,12,0,0">
+                <Button Text="Cancel"
+                        Clicked="OnCancel"
+                        BackgroundColor="#E0D5A5"
+                        TextColor="Black"
+                        CornerRadius="12"
+                        Padding="18,10" />
+                <Button Text="Save"
+                        Clicked="OnSave"
+                        BackgroundColor="#3A3428"
+                        TextColor="White"
+                        CornerRadius="12"
+                        Padding="18,10" />
+            </HorizontalStackLayout>
+
+        </VerticalStackLayout>
+    </Border>
+</toolkit:Popup>

@@ -4,6 +4,7 @@ using BibliothequariaFrontend.Services;
 using CommunityToolkit.Maui.Views;
 using Microsoft.Maui.Controls;
 using System;
+using System.Linq;
 using System.Collections.ObjectModel;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
@@ -19,7 +20,9 @@ namespace BibliothequariaFrontend.Pages
 
         private readonly MemberService _memberService;
 
+        private List<ClanOverviewDTO> _allMembers = new();           // all members (for popup)
         public ObservableCollection<ClanOverviewDTO> Members { get; } = new();
+
 
         public MemberOperationsPage()
         {
@@ -32,10 +35,7 @@ namespace BibliothequariaFrontend.Pages
                 await DisplayAlert("Info", "Not implemented yet.", "OK");
             });
 
-            ChangeStatusCommand = new Command(async () =>
-            {
-                await DisplayAlert("Info", "Not implemented yet.", "OK");
-            });
+            ChangeStatusCommand = new Command(async () => await ShowChangeStatusPopupAsync());
 
             // Open the popup and handle the result
             AddUserCommand = new Command(async () => await ShowAddMemberPopupAsync());
@@ -55,14 +55,18 @@ namespace BibliothequariaFrontend.Pages
             try
             {
                 var list = await _memberService.GetOverviewAsync();
+                _allMembers = list ?? new List<ClanOverviewDTO>();   // <-- fill this
+
                 Members.Clear();
-                foreach (var m in list) Members.Add(m);
+                foreach (var m in _allMembers)                        // or filter to active
+                    Members.Add(m);
             }
             catch (Exception ex)
             {
                 await DisplayAlert("Greška", $"Ne mogu učitati članove.\n{ex.Message}", "OK");
             }
         }
+
 
 
         private async Task ShowAddMemberPopupAsync()
@@ -102,6 +106,28 @@ namespace BibliothequariaFrontend.Pages
 
 
         //end of loading real data in the rectangle
+
+        //changing member status 
+        private async Task ShowChangeStatusPopupAsync()
+        {
+            if (_allMembers.Count == 0) await LoadMembersAsync();
+
+            var popup = new ChangeMemberStatusPopup(_allMembers);
+            var result = await this.ShowPopupAsync(popup) as ChangeStatusResult;
+            if (result is null) return;
+
+            try
+            {
+                await _memberService.UpdateStatusAsync(result.MemberId, result.Status);
+                await LoadMembersAsync();
+                await DisplayAlert("Status changed", "Member status updated.", "OK");
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Greška", ex.Message, "OK");
+            }
+        }
+
 
 
         private async void OnDashboardTapped(object sender, EventArgs e)

@@ -12,6 +12,7 @@ public class ClanOverviewDTO
     public DateOnly? DatumUclane { get; set; }
     public DateOnly? DatumIsteka { get; set; }
     public int BorrowedCount { get; set; }
+    public bool? Status { get; set; }
 
     // Display helpers
     public string FullName => $"{Ime} {Prezime}".Trim();

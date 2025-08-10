@@ -13,6 +13,8 @@ namespace Bibliothequaria.Controllers
     {
         BibliothequariaContext db = new BibliothequariaContext();
 
+        public class ChangeStatusDTO { public int Id { get; set; } public bool Status { get; set; } }
+
         //get svih clanova
         [HttpGet]
 
@@ -68,6 +70,7 @@ namespace Bibliothequaria.Controllers
                 rezultat.Ime = dto.Ime;
                 rezultat.Prezime = dto.Prezime;
                 rezultat.DatumUclane = dto.DatumUclane;
+                rezultat.Status = dto.Status;
                 db.Update(rezultat);
                 await db.SaveChangesAsync();
             }
@@ -95,6 +98,16 @@ namespace Bibliothequaria.Controllers
             var list = await query.OrderBy(x => x.Id).ToListAsync();
             return Ok(list);
         }
-        
+
+        [HttpPut("status")]
+        public async Task<IActionResult> ChangeStatus([FromBody] ChangeStatusDTO dto)
+        {
+            var clan = await db.Clans.FindAsync(dto.Id);
+            if (clan is null) return NotFound();
+
+            clan.Status = dto.Status; // bool? in DB is fine
+            await db.SaveChangesAsync();
+            return NoContent();
+        }
     }
 }

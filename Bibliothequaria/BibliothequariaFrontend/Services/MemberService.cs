@@ -32,4 +32,12 @@ public sealed class MemberService
         return await _http.GetFromJsonAsync<List<ClanOverviewDTO>>("api/Clan/Pregled/pregled", cancellationToken: ct)
                ?? new List<ClanOverviewDTO>();
     }
+
+    public async Task UpdateStatusAsync(int id, bool status, CancellationToken ct = default)
+    {
+        var payload = new { Id = id, Status = status };
+        using var res = await _http.PutAsJsonAsync("api/Clan/ChangeStatus/status", payload, ct); // or api/Clan/ChangeStatus if you use [action]
+        res.EnsureSuccessStatusCode();
+    }
+
 }

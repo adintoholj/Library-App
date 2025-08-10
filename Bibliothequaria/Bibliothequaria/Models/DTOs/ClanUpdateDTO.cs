@@ -9,5 +9,6 @@
         public string Prezime { get; set; } = null!;
 
         public DateOnly DatumUclane { get; set; }
+        public bool? Status { get; set; }
     }
 }
