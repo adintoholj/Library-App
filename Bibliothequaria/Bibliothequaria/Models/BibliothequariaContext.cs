@@ -61,11 +61,16 @@ public partial class BibliothequariaContext : DbContext
 
             entity.ToTable("Radnik");
 
+            entity.HasIndex(e => e.EMail, "UX_Radnik_Email").IsUnique();
+
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.EMail)
                 .HasMaxLength(100)
                 .HasColumnName("E-mail");
             entity.Property(e => e.Ime).HasMaxLength(50);
+            entity.Property(e => e.PasswordHash).HasMaxLength(64);
+            entity.Property(e => e.PasswordHashIterations).HasDefaultValue(120000);
+            entity.Property(e => e.PasswordSalt).HasMaxLength(16);
             entity.Property(e => e.Prezime).HasMaxLength(50);
             entity.Property(e => e.Telefon).HasMaxLength(20);
         });

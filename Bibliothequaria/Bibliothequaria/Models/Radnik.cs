@@ -15,5 +15,11 @@ public partial class Radnik
 
     public string EMail { get; set; } = null!;
 
+    public byte[]? PasswordHash { get; set; }
+
+    public byte[]? PasswordSalt { get; set; }
+
+    public int PasswordHashIterations { get; set; }
+
     public virtual ICollection<Transakcija> Transakcijas { get; set; } = new List<Transakcija>();
 }
