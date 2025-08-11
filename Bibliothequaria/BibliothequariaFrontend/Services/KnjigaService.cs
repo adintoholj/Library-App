@@ -36,4 +36,12 @@ public sealed class KnjigaService
         res.EnsureSuccessStatusCode();
         return (await res.Content.ReadFromJsonAsync<List<KnjigaListDTO>>(cancellationToken: ct)) ?? new();
     }
+
+    public async Task<KnjigaDTO> CreateAsync(KnjigaCreateDTO dto, CancellationToken ct = default)
+    {
+        var res = await _http.PostAsJsonAsync("api/Knjiga/unesi", dto, ct);
+        res.EnsureSuccessStatusCode();
+        var created = await res.Content.ReadFromJsonAsync<KnjigaDTO>(cancellationToken: ct);
+        return created ?? throw new InvalidOperationException("Empty response from server.");
+    }
 }

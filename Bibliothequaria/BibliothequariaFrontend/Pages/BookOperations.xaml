@@ -102,7 +102,7 @@
                                      Spacing="16"
                                      VerticalOptions="Center"
                                      HorizontalOptions="Start">
-                    <controls:GrayButtonControl Text="Add a new book…" Command="{Binding AddBookCommand}" />
+                    <controls:GrayButtonControl x:Name="BtnAdd" Text="Add a new book…" Command="{Binding AddBookCommand}" />
                     <controls:GrayButtonControl Text="List available books" Command="{Binding ListAvailableBooksCommand}" />
                     <controls:GrayButtonControl Text="List borrowed books" Command="{Binding ListBorrowedBooksCommand}" />
                 </VerticalStackLayout>

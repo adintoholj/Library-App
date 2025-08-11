@@ -4,15 +4,20 @@ using CommunityToolkit.Maui.Views;
 using Microsoft.Maui.Controls;
 using BibliothequariaFrontend.Models;
 using BibliothequariaFrontend.Services;
+using BibliothequariaFrontend.Controls;
 
 namespace BibliothequariaFrontend.Pages
 {
     public partial class BookOperations : ContentPage
     {
-        // live list bound to the CollectionView
+        // What the list is currently showing
+        private enum Showing { None, Available, Borrowed }
+        private Showing _showing = Showing.None;
+
+        // Live list bound to the CollectionView
         public ObservableCollection<KnjigaListDTO> Books { get; } = new();
 
-        // commands for the three buttons
+        // Commands for the three buttons
         public ICommand AddBookCommand { get; }
         public ICommand ListAvailableBooksCommand { get; }
         public ICommand ListBorrowedBooksCommand { get; }
@@ -25,14 +30,10 @@ namespace BibliothequariaFrontend.Pages
 
             _bookService = ServiceHelper.GetRequiredService<KnjigaService>();
 
-            //Create commands first
-            AddBookCommand = new Command(async () =>
-                await DisplayAlert("Info", "Add book UI coming soon.", "OK"));
-
+            AddBookCommand = new Command(async () => await ShowAddBookPopupAsync());
             ListAvailableBooksCommand = new Command(async () => await LoadAvailableAsync());
             ListBorrowedBooksCommand = new Command(async () => await LoadBorrowedAsync());
 
-            //Then bind the page
             BindingContext = this;
         }
 
@@ -40,6 +41,7 @@ namespace BibliothequariaFrontend.Pages
         {
             try
             {
+                _showing = Showing.Available;
                 var list = await _bookService.GetAvailableAsync();
                 Books.Clear();
                 foreach (var b in list) Books.Add(b);
@@ -54,9 +56,41 @@ namespace BibliothequariaFrontend.Pages
         {
             try
             {
+                _showing = Showing.Borrowed;
                 var list = await _bookService.GetBorrowedAsync();
                 Books.Clear();
                 foreach (var b in list) Books.Add(b);
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Greška", ex.Message, "OK");
+            }
+        }
+
+        // Add book
+        private async Task ShowAddBookPopupAsync()
+        {
+            var popup = new AddBookPopup();
+            var result = await this.ShowPopupAsync(popup) as AddBookResult;
+            if (result is null) return; // user canceled
+
+            try
+            {
+                var dto = new KnjigaCreateDTO
+                {
+                    Naslov = result.Naslov,
+                    Autor = result.Autor,
+                    Zanr = result.Zanr,
+                    BrojStrana = result.BrojStrana
+                };
+
+                await _bookService.CreateAsync(dto);
+
+                await DisplayAlert("Success", "Book added.", "OK");
+
+                // Refresh current view if needed
+                if (_showing == Showing.Available) await LoadAvailableAsync();
+                else if (_showing == Showing.Borrowed) await LoadBorrowedAsync();
             }
             catch (Exception ex)
             {
@@ -78,9 +112,9 @@ namespace BibliothequariaFrontend.Pages
             await Shell.Current.GoToAsync("//settings");
 
         private void OnProfileTapped(object sender, EventArgs e) =>
-            this.ShowPopup(new BibliothequariaFrontend.Controls.ProfileMenuPopup());
+            this.ShowPopup(new ProfileMenuPopup());
 
         private void OnAvatarTapped(object sender, EventArgs e) =>
-            this.ShowPopup(new BibliothequariaFrontend.Controls.ProfileMenuPopup());
+            this.ShowPopup(new ProfileMenuPopup());
     }
 }

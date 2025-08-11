@@ -77,6 +77,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Controls\AddBookPopup.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Controls\AddMemberPopup.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
