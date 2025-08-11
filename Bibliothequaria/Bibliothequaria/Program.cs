@@ -1,4 +1,6 @@
 
+using Bibliothequaria.Models;
+
 namespace Bibliothequaria
 {
     public class Program
@@ -13,6 +15,8 @@ namespace Bibliothequaria
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
+            builder.Services.AddDbContext<BibliothequariaContext>(o =>
+    o.EnableDetailedErrors().EnableSensitiveDataLogging());
 
             var app = builder.Build();
 
@@ -22,6 +26,7 @@ namespace Bibliothequaria
                 app.UseSwagger();
                 app.UseSwaggerUI();
                 app.UseHttpsRedirection();
+                app.UseDeveloperExceptionPage();
             }
 
             app.UseHttpsRedirection();

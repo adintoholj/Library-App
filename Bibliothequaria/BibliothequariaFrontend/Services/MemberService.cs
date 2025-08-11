@@ -40,4 +40,24 @@ public sealed class MemberService
         res.EnsureSuccessStatusCode();
     }
 
+    /*public async Task<List<LoanHistoryItem>> GetLoanHistoryAsync(int memberId, CancellationToken ct = default)
+    {
+        // Try the REST-ish route first
+        using var res1 = await _http.GetAsync($"api/Transakcija/History/{memberId}", ct);
+        if (res1.IsSuccessStatusCode)
+            return (await res1.Content.ReadFromJsonAsync<List<LoanHistoryItem>>(cancellationToken: ct)) ?? new();
+
+        // Fallback to query-string variant if you wire it that way
+        using var res2 = await _http.GetAsync($"api/Transakcija/History?memberId={memberId}", ct);
+        res2.EnsureSuccessStatusCode();
+        return (await res2.Content.ReadFromJsonAsync<List<LoanHistoryItem>>(cancellationToken: ct)) ?? new();
+    }*/
+
+    public async Task<List<LoanHistoryItem>> GetLoanHistoryAsync(int memberId, CancellationToken ct = default)
+    {
+        using var res = await _http.GetAsync($"api/Transakcija/History/{memberId}", ct);
+        res.EnsureSuccessStatusCode();
+        return (await res.Content.ReadFromJsonAsync<List<LoanHistoryItem>>(cancellationToken: ct)) ?? new();
+    }
+
 }

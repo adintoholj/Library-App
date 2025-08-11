@@ -94,7 +94,10 @@
 	  </MauiXaml>
 		<MauiXaml Update="Controls\AddMemberPopup.xaml">
     <Generator>MSBuild:Compile</Generator>
-  </MauiXaml>			
+  </MauiXaml>
+		<MauiXaml Update="Controls\ViewLoanHistoryPopup.xaml">
+		  <Generator>MSBuild:Compile</Generator>
+		</MauiXaml>			
   
 	  <MauiXaml Update="Pages\BookOperations.xaml">
 	    <Generator>MSBuild:Compile</Generator>

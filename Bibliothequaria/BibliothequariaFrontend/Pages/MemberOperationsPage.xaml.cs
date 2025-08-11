@@ -30,10 +30,7 @@ namespace BibliothequariaFrontend.Pages
 
             _memberService = ServiceHelper.GetRequiredService<MemberService>();
 
-            SeeInChargeCommand = new Command(async () =>
-            {
-                await DisplayAlert("Info", "Not implemented yet.", "OK");
-            });
+            SeeInChargeCommand = new Command(async () => await ShowLoanHistoryPopupAsync());
 
             ChangeStatusCommand = new Command(async () => await ShowChangeStatusPopupAsync());
 
@@ -155,6 +152,18 @@ namespace BibliothequariaFrontend.Pages
                 Members.Add(m);
         }
 
+        //show loan history
+
+        private async Task ShowLoanHistoryPopupAsync()
+        {
+            if (_allMembers.Count == 0) await LoadMembersAsync();
+
+            var popup = new ViewLoanHistoryPopup(
+                _allMembers,
+                memberId => _memberService.GetLoanHistoryAsync(memberId));
+
+            await this.ShowPopupAsync(popup);
+        }
 
 
 

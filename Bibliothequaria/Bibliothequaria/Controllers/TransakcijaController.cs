@@ -59,4 +59,37 @@ public class TransakcijaController : ControllerBase
         await db.SaveChangesAsync();
         return NoContent();
     }
+
+    [HttpGet("{memberId:int}")]
+    public async Task<ActionResult<IEnumerable<KnjigaLoanHistoryDTO>>> History(int memberId)
+    {
+        try
+        {
+            var raw = await (
+                from t in db.Transakcijas.AsNoTracking()
+                join k in db.Knjigas.AsNoTracking() on t.Idknjige equals k.Id
+                where t.Idclana == memberId
+                orderby t.Id descending
+                select new { k.Naslov, t.DatumPosudbe, t.DatumVracanja }
+            ).ToListAsync();
+
+            var list = raw.Select(x => new KnjigaLoanHistoryDTO
+            {
+                Naslov = x.Naslov ?? "(untitled)",
+                DatumPosudbe = x.DatumPosudbe,
+                RokVracanja = x.DatumPosudbe.AddMonths(2),   // done in memory (EF won’t translate AddMonths)
+                DatumVracanja = x.DatumVracanja
+            }).ToList();
+
+            return Ok(list);
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine("History error:\n" + ex); // shows full stack in the backend console
+            return Problem(ex.Message);
+        }
+    }
+
+
+
 }

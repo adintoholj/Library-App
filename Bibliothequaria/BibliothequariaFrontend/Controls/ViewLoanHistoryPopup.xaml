@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<toolkit:Popup
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+    x:Class="BibliothequariaFrontend.Controls.ViewLoanHistoryPopup">
+
+    <Border
+        Padding="22"
+        BackgroundColor="#DBCC99"
+        StrokeThickness="0"
+        StrokeShape="RoundRectangle 20"
+        WidthRequest="720"
+        HeightRequest="520">
+        <VerticalStackLayout Spacing="18">
+
+            <Label Text="View loan history"
+                   FontFamily="PoppinsBold"
+                   FontSize="22"
+                   TextColor="Black" />
+
+            <!-- Pick member -->
+            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="14">
+                <Label Text="Pick a member:"
+                       FontFamily="PoppinsRegular"
+                       FontSize="16"
+                       TextColor="Black"
+                       VerticalOptions="Center" />
+                <Picker x:Name="MemberPicker"
+                        Grid.Column="1"
+                        Title="Select member"
+                        ItemDisplayBinding="{Binding FullName}"
+                        TextColor="Black"
+                        TitleColor="Black"
+                        BackgroundColor="#EADFAE"
+                        FontFamily="PoppinsRegular" />
+            </Grid>
+
+            <!-- History list -->
+            <Frame BackgroundColor="#EADFAE" Padding="12" CornerRadius="12" HasShadow="False">
+                <Grid RowDefinitions="Auto,*" RowSpacing="8">
+                    <Grid Grid.Row="0" ColumnDefinitions="2*,*,*,*">
+                        <Label Grid.Column="0" Text="Book" FontFamily="PoppinsBold" TextColor="Black" />
+                        <Label Grid.Column="1" Text="Borrowed" FontFamily="PoppinsBold" TextColor="Black" />
+                        <Label Grid.Column="2" Text="Due" FontFamily="PoppinsBold" TextColor="Black" />
+                        <Label Grid.Column="3" Text="Returned" FontFamily="PoppinsBold" TextColor="Black" />
+                    </Grid>
+
+                    <CollectionView x:Name="HistoryList"
+                                    Grid.Row="1"
+                                    ItemsSource="{Binding .}"
+                                    VerticalOptions="Fill"
+                                    HeightRequest="220">
+                        <!--change the heightrequest depending on if the ui bugs out with the ratios-->
+                                    
+                        <CollectionView.EmptyView>
+                            <Label Text="No loans yet."
+                                   TextColor="Black"
+                                   FontFamily="PoppinsRegular"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center"/>
+                        </CollectionView.EmptyView>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid ColumnDefinitions="2*,*,*,*" Padding="4,8">
+                                    <Label Grid.Column="0" Text="{Binding Naslov}" TextColor="Black" FontFamily="PoppinsRegular"/>
+                                    <Label Grid.Column="1" Text="{Binding BorrowedDisplay}" TextColor="Black" FontFamily="PoppinsRegular"/>
+                                    <Label Grid.Column="2" Text="{Binding DueDisplay}"      TextColor="Black" FontFamily="PoppinsRegular"/>
+                                    <Label Grid.Column="3" Text="{Binding ReturnedDisplay}" TextColor="Black" FontFamily="PoppinsRegular"/>
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </Grid>
+            </Frame>
+
+            <HorizontalStackLayout Spacing="12" HorizontalOptions="End">
+                <Button Text="Close"
+                        Clicked="OnClose"
+                        BackgroundColor="#3A3428"
+                        TextColor="White"
+                        CornerRadius="12"
+                        Padding="18,10" />
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
+    </Border>
+</toolkit:Popup>
+    
