@@ -20,4 +20,20 @@ public sealed class KnjigaService
         res.EnsureSuccessStatusCode();
         return (await res.Content.ReadFromJsonAsync<List<KnjigaSearchDTO>>(cancellationToken: ct)) ?? new();
     }
+
+    //book operations
+
+    public async Task<List<KnjigaListDTO>> GetAvailableAsync(CancellationToken ct = default)
+    {
+        using var res = await _http.GetAsync("api/Knjiga/Available", ct);
+        res.EnsureSuccessStatusCode();
+        return (await res.Content.ReadFromJsonAsync<List<KnjigaListDTO>>(cancellationToken: ct)) ?? new();
+    }
+
+    public async Task<List<KnjigaListDTO>> GetBorrowedAsync(CancellationToken ct = default)
+    {
+        using var res = await _http.GetAsync("api/Knjiga/Borrowed", ct);
+        res.EnsureSuccessStatusCode();
+        return (await res.Content.ReadFromJsonAsync<List<KnjigaListDTO>>(cancellationToken: ct)) ?? new();
+    }
 }

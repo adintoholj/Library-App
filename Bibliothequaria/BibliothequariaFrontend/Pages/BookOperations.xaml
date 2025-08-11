@@ -107,19 +107,53 @@
                     <controls:GrayButtonControl Text="List borrowed books" Command="{Binding ListBorrowedBooksCommand}" />
                 </VerticalStackLayout>
 
-                <!-- Right: empty results rectangle -->
+                <!-- Right: results rectangle -->
                 <Frame Grid.Column="1"
-                       x:Name="ResultsCard"
-                       BackgroundColor="#B9B9B9"    
-                    BorderColor="#9D9D9D"
-                       CornerRadius="12"
-                       HasShadow="False"
-                       Padding="0"
-                       Margin="24,0,0,0"
-                       VerticalOptions="FillAndExpand">
-                    <!-- host for future CollectionView -->
-                    <Grid x:Name="ResultsHost" BackgroundColor="#B9B9B9" />
+       x:Name="ResultsCard"
+       BackgroundColor="#B9B9B9"
+       BorderColor="#9D9D9D"
+       CornerRadius="12"
+       HasShadow="False"
+       Padding="0"
+       Margin="24,0,0,0"
+       VerticalOptions="FillAndExpand">
+
+                    <Grid RowDefinitions="Auto,*" Padding="16" BackgroundColor="#B9B9B9">
+                        <!-- headers -->
+                        <Grid Grid.Row="0" ColumnDefinitions="Auto,2*,*" Margin="0,0,0,8">
+                            <Label Grid.Column="0" Text="" />
+                            <Label Grid.Column="1" Text="Title"  FontFamily="PoppinsBold" TextColor="Black"/>
+                            <Label Grid.Column="2" Text="Author" FontFamily="PoppinsBold" TextColor="Black"/>
+                        </Grid>
+
+                        <!-- results -->
+                        <CollectionView Grid.Row="1"
+                        x:Name="BooksList"
+                        ItemsSource="{Binding Books}">
+                            <CollectionView.EmptyView>
+                                <Label Text="No items to display."
+                       TextColor="Black"
+                       FontFamily="PoppinsRegular"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"/>
+                            </CollectionView.EmptyView>
+
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid ColumnDefinitions="Auto,2*,*" Padding="0,8">
+                                        <Image Grid.Column="0"
+                               Source="openedbook.png"
+                               HeightRequest="24" WidthRequest="24"
+                               VerticalOptions="Center" />
+                                        <Label Grid.Column="1" Text="{Binding Naslov}" TextColor="Black" FontFamily="PoppinsRegular"/>
+                                        <Label Grid.Column="2" Text="{Binding Autor}"  TextColor="Black" FontFamily="PoppinsRegular"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </Grid>
                 </Frame>
+
             </Grid>
         </Grid>
     </Grid>

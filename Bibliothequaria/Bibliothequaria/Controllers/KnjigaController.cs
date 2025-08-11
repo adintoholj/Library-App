@@ -148,5 +148,32 @@ namespace Bibliothequaria.Controllers
 
             return Ok(list);
         }
+
+
+        //for the book operations screen
+
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<KnjigaListDTO>>> Available()
+        {
+            var list = await db.Knjigas.AsNoTracking()
+                .Where(k => k.Slobodna == true)
+                .OrderBy(k => k.Naslov)
+                .Select(k => new KnjigaListDTO { Id = k.Id, Naslov = k.Naslov, Autor = k.Autor })
+                .ToListAsync();
+
+            return Ok(list);
+        }
+
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<KnjigaListDTO>>> Borrowed()
+        {
+            var list = await db.Knjigas.AsNoTracking()
+                .Where(k => k.Slobodna == false)
+                .OrderBy(k => k.Naslov)
+                .Select(k => new KnjigaListDTO { Id = k.Id, Naslov = k.Naslov, Autor = k.Autor })
+                .ToListAsync();
+
+            return Ok(list);
+        }
     }
 }
