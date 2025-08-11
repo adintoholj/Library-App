@@ -28,7 +28,10 @@ namespace BibliothequariaFrontend
                 BaseAddress = new Uri("http://localhost:5195/")  // desktop uses localhost
             });
 
-
+            builder.Services.AddHttpClient<KnjigaService>(c =>
+            {
+                c.BaseAddress = new Uri("http://localhost:5195/"); // same place you set MemberService
+            });
 
             // Our API wrapper
             builder.Services.AddSingleton<MemberService>();

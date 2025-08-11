@@ -114,5 +114,39 @@ namespace Bibliothequaria.Controllers
 
             return NoContent();
         }
+
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<KnjigaSearchDTO>>> Search([FromQuery] string q)
+        {
+            q = (q ?? "").Trim();
+            if (q.Length < 2) return Ok(Array.Empty<KnjigaSearchDTO>());
+
+            var terms = q.Split(' ', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries)
+                         .Select(t => t.ToLower()).ToArray();
+
+            // AND all terms; each term can match title OR author OR genre
+            IQueryable<Knjiga> baseQ = db.Knjigas.AsNoTracking();
+            foreach (var t in terms)
+            {
+                baseQ = baseQ.Where(k =>
+                    k.Naslov.ToLower().Contains(t) ||
+                    k.Autor.ToLower().Contains(t) ||
+                    k.Zanr.ToLower().Contains(t));
+            }
+
+            var list = await baseQ
+                .OrderBy(k => k.Naslov)
+                .Select(k => new KnjigaSearchDTO
+                {
+                    Id = k.Id,
+                    Naslov = k.Naslov,
+                    Autor = k.Autor,
+                    Zanr = k.Zanr,
+                    Slobodna = k.Slobodna
+                })
+                .ToListAsync();
+
+            return Ok(list);
+        }
     }
 }

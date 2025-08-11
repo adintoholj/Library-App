@@ -148,56 +148,61 @@
                 </Image>
             </Grid>
 
-            <!-- Search field -->
-            <Frame
-        Grid.Row="1"
-        BackgroundColor="#FDBF1D"
-        CornerRadius="28"
-        HasShadow="False"
-        HeightRequest="56"
-        HorizontalOptions="Fill"
-        Padding="10,0">
-                <Grid ColumnDefinitions="Auto,*,Auto" VerticalOptions="Center">
-                    <Image
-            Grid.Column="0"
-            Source="searchoperations.png"
-            HeightRequest="24"
-            WidthRequest="24"
-            VerticalOptions="Center" />
-                    <Entry
-            Grid.Column="1"
-            Placeholder="Text"
-            FontFamily="PoppinsRegular"
+            <!-- Search bar -->
+            <Grid ColumnDefinitions="*,Auto" Margin="0,8,0,12" Grid.Row="1">
+                <Entry x:Name="SearchEntry"
+           Placeholder="Text"
+           Completed="OnSearchCompleted"
+           BackgroundColor="#FDBF1D"
+           TextColor="Black"
+           FontFamily="PoppinsRegular" />
+                <Button Grid.Column="1"
+            Text="Search"
+            Clicked="OnSearchClicked"
+            BackgroundColor="#CFCFCF"
             TextColor="Black"
-            PlaceholderColor="#666"
-            BackgroundColor="Transparent"
-            VerticalOptions="Center" />
-                    <Image
-            Grid.Column="2"
-            Source="searchoperations.png"
-            HeightRequest="24"
-            WidthRequest="24"
-            HorizontalOptions="End"
-            VerticalOptions="Center" />
+            CornerRadius="8"
+            Padding="18,10"/>
+            </Grid>
+
+            <!-- Results card -->
+            <Frame BackgroundColor="#DBCC99" CornerRadius="8" Padding="12" HasShadow="False" Grid.Row="3">
+                <Grid RowDefinitions="Auto,*" RowSpacing="8">
+                    <!-- Header row -->
+                    <Grid Grid.Row="0" ColumnDefinitions="2*,*,*,Auto">
+                        <Label Grid.Column="0" Text="Title"   FontFamily="PoppinsBold" TextColor="Black"/>
+                        <Label Grid.Column="1" Text="Author"  FontFamily="PoppinsBold" TextColor="Black"/>
+                        <Label Grid.Column="2" Text="Genre"   FontFamily="PoppinsBold" TextColor="Black"/>
+                        <Label Grid.Column="3" Text="Availability"  FontFamily="PoppinsBold" TextColor="Black"/>
+                    </Grid>
+
+                    <!-- Live results -->
+                    <CollectionView x:Name="ResultsList"
+                        Grid.Row="1"
+                        ItemsSource="{Binding Results}">
+                        <CollectionView.EmptyView>
+                            <Label Text="No results."
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center"
+                       TextColor="Black"
+                       FontFamily="PoppinsRegular"/>
+                        </CollectionView.EmptyView>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Grid ColumnDefinitions="2*,*,*,Auto" Padding="4,8">
+                                    <Label Grid.Column="0" Text="{Binding Naslov}" TextColor="Black" FontFamily="PoppinsRegular"/>
+                                    <Label Grid.Column="1" Text="{Binding Autor}"  TextColor="Black" FontFamily="PoppinsRegular"/>
+                                    <Label Grid.Column="2" Text="{Binding Zanr}"   TextColor="Black" FontFamily="PoppinsRegular"/>
+                                    <Label Grid.Column="3" Text="{Binding Availability}" TextColor="Black" FontFamily="PoppinsRegular"/>
+                                </Grid>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
                 </Grid>
             </Frame>
 
-            <!-- Search button -->
-            <controls:GrayButtonControl
-        Grid.Row="2"
-        Text="Search"
-        Command="{Binding PerformSearchCommand}"
-        HorizontalOptions="Center" />
-
-            <!-- Results placeholder -->
-            <Frame
-        Grid.Row="3"
-        BackgroundColor="#DBCC99"
-        CornerRadius="8"
-        HasShadow="False"
-        Padding="10">
-                <!-- later: your search results ListView / CollectionView -->
-            </Frame>
+            <!-- later: your search results ListView / CollectionView -->
+            
 
             <!-- bottom spacer if needed -->
             <BoxView Grid.Row="4" HeightRequest="20" Color="Transparent" />
