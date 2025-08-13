@@ -149,8 +149,8 @@ VerticalOptions="Center" />
                     <Label FontFamily="PoppinsRegular" FontSize="18">
                         <Label.FormattedText>
                             <FormattedString>
-                                <Span Text="Welcome, " TextColor="{DynamicResource ContentTextColor}"/>
-                                <Span Text="Adin!" TextColor="#FDBF1D" />
+                                <Span Text="Welcome " TextColor="{DynamicResource ContentTextColor}"/>
+                                <Span Text="" TextColor="#FDBF1D" /> <!--changed this-->
                             </FormattedString>
                         </Label.FormattedText>
                     </Label>

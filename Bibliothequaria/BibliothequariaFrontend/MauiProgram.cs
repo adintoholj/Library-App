@@ -37,6 +37,11 @@ namespace BibliothequariaFrontend
             builder.Services.AddSingleton<BibliothequariaFrontend.Services.ISettingsService,
                               BibliothequariaFrontend.Services.SettingsService>();
 
+            //reglogin
+
+            builder.Services.AddHttpClient<BibliothequariaFrontend.Services.AuthService>();
+
+
 
             // Our API wrapper
             builder.Services.AddSingleton<MemberService>();

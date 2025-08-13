@@ -85,6 +85,10 @@ public partial class BibliothequariaContext : DbContext
 
             entity.HasIndex(e => e.Idclana, "IX_Transakcija_Active_ByMember").HasFilter("([DatumVracanja] IS NULL)");
 
+            entity.HasIndex(e => e.Idknjige, "UX_Transakcija_BookActive")
+                .IsUnique()
+                .HasFilter("([DatumVracanja] IS NULL)");
+
             entity.Property(e => e.Id).HasColumnName("ID");
             entity.Property(e => e.Idclana).HasColumnName("IDClana");
             entity.Property(e => e.Idknjige).HasColumnName("IDKnjige");
@@ -96,8 +100,8 @@ public partial class BibliothequariaContext : DbContext
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__Transakci__IDCla__3F466844");
 
-            entity.HasOne(d => d.IdknjigeNavigation).WithMany(p => p.Transakcijas)
-                .HasForeignKey(d => d.Idknjige)
+            entity.HasOne(d => d.IdknjigeNavigation).WithOne(p => p.Transakcija)
+                .HasForeignKey<Transakcija>(d => d.Idknjige)
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasConstraintName("FK__Transakci__IDKnj__3E52440B");
 

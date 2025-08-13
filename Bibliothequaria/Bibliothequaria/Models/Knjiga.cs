@@ -17,5 +17,5 @@ public partial class Knjiga
 
     public bool? Slobodna { get; set; }
 
-    public virtual ICollection<Transakcija> Transakcijas { get; set; } = new List<Transakcija>();
+    public virtual Transakcija? Transakcija { get; set; }
 }

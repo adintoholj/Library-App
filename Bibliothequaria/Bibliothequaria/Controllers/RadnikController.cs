@@ -1,6 +1,11 @@
 ﻿using Bibliothequaria.Models;
-using Microsoft.AspNetCore.Mvc;
 using Bibliothequaria.Models.DTOs;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;               // <-- enables FirstOrDefaultAsync, FindAsync, etc.
+using Bibliothequaria.Services;          
+
+
+
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -84,5 +89,113 @@ namespace Bibliothequaria.Controllers
             //logika je da ukucas id radnika kojem hoces da izmijenis podatke i tako mijenjas
             return Ok(rezultat);
         }
+
+        // ===== REGISTER (START) =====
+        [HttpPost("register")]
+        public async Task<ActionResult<RadnikAuthResponseDTO>> Register([FromBody] RegisterRadnikDTO dto)
+        {
+            if (string.IsNullOrWhiteSpace(dto.Email) || string.IsNullOrWhiteSpace(dto.Password))
+                return BadRequest("Email and password are required.");
+
+            var email = dto.Email.Trim();
+
+            // entity property is EMail (mapped to [E-mail])
+            var existing = await db.Radniks.FirstOrDefaultAsync(r => r.EMail == email);
+
+            if (existing != null && existing.PasswordHash != null)
+                return Conflict("An account with this email already exists.");
+
+            var target = existing ?? new Radnik
+            {
+                Ime = (dto.Ime ?? "").Trim(),
+                Prezime = (dto.Prezime ?? "").Trim(),
+                Telefon = dto.Telefon,
+                EMail = email           // <-- EMail
+            };
+
+            var (hash, salt, iters) = PasswordCrypto.CreateHash(dto.Password);
+            target.PasswordHash = hash;
+            target.PasswordSalt = salt;
+            target.PasswordHashIterations = iters;
+
+            if (existing == null)
+                db.Radniks.Add(target);
+
+            await db.SaveChangesAsync();
+
+            // DTO can expose Email (string) even though entity uses EMail
+            return new RadnikAuthResponseDTO
+            {
+                ID = target.Id,
+                Ime = target.Ime,
+                Prezime = target.Prezime,
+                EMail = target.EMail,   // <-- map back to DTO.Email
+                Telefon = target.Telefon
+            };
+        }
+        // ===== REGISTER (END) =====
+
+
+        // ===== LOGIN (START) =====
+        [HttpPost("login")]
+        public async Task<ActionResult<RadnikAuthResponseDTO>> Login([FromBody] LoginDTO dto)
+        {
+            if (string.IsNullOrWhiteSpace(dto.Email) || string.IsNullOrWhiteSpace(dto.Password))
+                return BadRequest("Email and password are required.");
+
+            var email = dto.Email.Trim();
+            var user = await db.Radniks.FirstOrDefaultAsync(r => r.EMail == email); // <-- EMail
+
+            if (user == null || user.PasswordHash == null || user.PasswordSalt == null)
+                return Unauthorized("Invalid credentials.");
+
+            var ok = PasswordCrypto.Verify(dto.Password, user.PasswordHash, user.PasswordSalt, user.PasswordHashIterations);
+            if (!ok) return Unauthorized("Invalid credentials.");
+
+            return new RadnikAuthResponseDTO
+            {
+                ID = user.Id,
+                Ime = user.Ime,
+                Prezime = user.Prezime,
+                EMail = user.EMail,     // <-- map back to DTO.Email
+                Telefon = user.Telefon
+            };
+        }
+        // ===== LOGIN (END) =====
+
+
+        // ===== LOGIN / REGISTER (START) =====
+        [HttpGet("{id}/profile")]
+        public async Task<ActionResult<RadnikAuthResponseDTO>> GetProfile(int id)
+        {
+            var u = await db.Radniks.FindAsync(id);
+            if (u == null) return NotFound();
+
+            return new RadnikAuthResponseDTO
+            {
+                ID = u.Id,                      // if your prop is ID, use ID here
+                Ime = u.Ime,
+                Prezime = u.Prezime,
+                EMail = u.EMail,
+                Telefon = u.Telefon
+            };
+        }
+
+        [HttpPut("{id}/profile")]
+        public async Task<IActionResult> UpdateProfile(int id, [FromBody] ProfileUpdateDTO dto)
+        {
+            var u = await db.Radniks.FindAsync(id);
+            if (u == null) return NotFound();
+
+            if (!string.IsNullOrWhiteSpace(dto.Ime)) u.Ime = dto.Ime.Trim();
+            if (!string.IsNullOrWhiteSpace(dto.Prezime)) u.Prezime = dto.Prezime.Trim();
+            if (!string.IsNullOrWhiteSpace(dto.Telefon)) u.Telefon = dto.Telefon.Trim();
+
+            await db.SaveChangesAsync();
+            return NoContent();
+        }
+        // ===== LOGIN / REGISTER (END) =====
+
+
     }
 }

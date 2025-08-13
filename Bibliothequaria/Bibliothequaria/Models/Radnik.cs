@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Bibliothequaria.Models;
 
@@ -13,7 +14,8 @@ public partial class Radnik
 
     public string Telefon { get; set; } = null!;
 
-    public string EMail { get; set; } = null!;
+    [Column("E-mail")]
+    public string EMail { get; set; } = "";
 
     public byte[]? PasswordHash { get; set; }
 
