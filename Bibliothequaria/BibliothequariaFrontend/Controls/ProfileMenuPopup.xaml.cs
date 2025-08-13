@@ -8,6 +8,16 @@ namespace BibliothequariaFrontend.Controls
         public ProfileMenuPopup()
         {
             InitializeComponent();
+
+            // pull from saved session
+            var name = Preferences.Default.Get("CurrentUserName", "");
+            var email = Preferences.Default.Get("CurrentUserEmail", "");
+
+            if (!string.IsNullOrWhiteSpace(name))
+                PopupNameLabel.Text = name;     // must match x:Name in XAML
+
+            if (!string.IsNullOrWhiteSpace(email))
+                PopupEmailLabel.Text = email;   // must match x:Name in XAML
         }
 
         private async void OnMoreInfoClicked(object sender, EventArgs e)

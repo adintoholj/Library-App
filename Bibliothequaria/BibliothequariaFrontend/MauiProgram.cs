@@ -39,7 +39,11 @@ namespace BibliothequariaFrontend
 
             //reglogin
 
-            builder.Services.AddHttpClient<BibliothequariaFrontend.Services.AuthService>();
+            builder.Services.AddHttpClient<BibliothequariaFrontend.Services.AuthService>(c =>
+            {
+                c.Timeout = TimeSpan.FromSeconds(30);
+            });
+
 
 
 

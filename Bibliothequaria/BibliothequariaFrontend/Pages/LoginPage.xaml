@@ -48,6 +48,7 @@
 
             <!-- E-mail address -->
             <Entry
+        x:Name="EmailEntry"
         Placeholder="E-mail address"
         Keyboard="Email"
         FontFamily="PoppinsRegular"
@@ -56,6 +57,7 @@
 
             <!-- Password -->
             <Entry
+        x:Name="PasswordEntry"
         Placeholder="Password"
         IsPassword="True"
         FontFamily="PoppinsRegular"
@@ -73,7 +75,8 @@
             <controls:BrownButtonStart
         Text="Login"
         Command="{Binding LoginCommand}"
-        HorizontalOptions="Center" />
+        HorizontalOptions="Center" 
+        />
         </StackLayout>
 
         <!-- Row 3: Back arrow -->

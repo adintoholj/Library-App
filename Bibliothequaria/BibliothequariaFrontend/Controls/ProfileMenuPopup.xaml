@@ -26,19 +26,19 @@
             Aspect="AspectFill"
             VerticalOptions="Center" />
                     <VerticalStackLayout Spacing="2" VerticalOptions="Center">
-                        <Label
-              Text="Adin --------"
+                        <Label x:Name="PopupNameLabel"
+              Text=""
               FontAttributes="Bold"
               FontSize="18"
               TextColor="Black" />
-                        <Label
-              Text="adin@hotmail.com"
+                        <Label x:Name="PopupEmailLabel"
+              Text=""
               FontSize="14"
               TextColor="Black" />
                     </VerticalStackLayout>
                 </HorizontalStackLayout>
 
-                <!-- Last login pill -->
+                <!-- Last login pill 
                 <HorizontalStackLayout Spacing="8" VerticalOptions="Center">
                     <Label
             Text="Last login:"
@@ -56,7 +56,7 @@
               FontSize="14"
               TextColor="White" />
                     </Frame>
-                </HorizontalStackLayout>
+                </HorizontalStackLayout> -->
 
                 <!-- More information button -->
                 <Button

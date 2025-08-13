@@ -94,10 +94,10 @@ namespace Bibliothequaria.Controllers
         [HttpPost("register")]
         public async Task<ActionResult<RadnikAuthResponseDTO>> Register([FromBody] RegisterRadnikDTO dto)
         {
-            if (string.IsNullOrWhiteSpace(dto.Email) || string.IsNullOrWhiteSpace(dto.Password))
+            if (string.IsNullOrWhiteSpace(dto.EMail) || string.IsNullOrWhiteSpace(dto.Password))
                 return BadRequest("Email and password are required.");
 
-            var email = dto.Email.Trim();
+            var email = dto.EMail.Trim();
 
             // entity property is EMail (mapped to [E-mail])
             var existing = await db.Radniks.FirstOrDefaultAsync(r => r.EMail == email);
@@ -140,10 +140,10 @@ namespace Bibliothequaria.Controllers
         [HttpPost("login")]
         public async Task<ActionResult<RadnikAuthResponseDTO>> Login([FromBody] LoginDTO dto)
         {
-            if (string.IsNullOrWhiteSpace(dto.Email) || string.IsNullOrWhiteSpace(dto.Password))
+            if (string.IsNullOrWhiteSpace(dto.EMail) || string.IsNullOrWhiteSpace(dto.Password))
                 return BadRequest("Email and password are required.");
 
-            var email = dto.Email.Trim();
+            var email = dto.EMail.Trim();
             var user = await db.Radniks.FirstOrDefaultAsync(r => r.EMail == email); // <-- EMail
 
             if (user == null || user.PasswordHash == null || user.PasswordSalt == null)

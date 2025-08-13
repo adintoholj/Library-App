@@ -71,37 +71,49 @@
           WidthRequest="40"
           HorizontalOptions="Start" />
 
-                <!-- Name field -->
+                <!-- Name -->
                 <Entry
-          Text="Adin, ???"
-          FontFamily="PoppinsRegular"
-          FontSize="14"
-          TextColor="Black"
-          BackgroundColor="Transparent" />
+    x:Name="NameEntry"
+    Placeholder="Name"
+    Text="" 
+    FontFamily="PoppinsRegular"
+    FontSize="14"
+    TextColor="Black"
+    BackgroundColor="Transparent" />
 
-                <!-- Second field (dotted placeholder) -->
+                <!-- Surname -->
                 <Entry
-          Text="........................................"
-          FontFamily="PoppinsRegular"
-          FontSize="14"
-          TextColor="Black"
-          BackgroundColor="Transparent" />
+    x:Name="SurnameEntry"
+    Placeholder="Surname"
+    Text=""
+    FontFamily="PoppinsRegular"
+    FontSize="14"
+    TextColor="Black"
+    BackgroundColor="Transparent" />
 
-                <!-- Email -->
+                <!-- Email (read-only) -->
                 <Entry
-          Text="adin@hotmail.com"
-          FontFamily="PoppinsRegular"
-          FontSize="14"
-          TextColor="Black"
-          BackgroundColor="Transparent" />
+    x:Name="EmailLabel"
+    Placeholder="Email"
+    Text=""
+    IsReadOnly="True"            
+                    Keyboard="Email"
+    FontFamily="PoppinsRegular"
+    FontSize="14"
+    TextColor="Black"
+    BackgroundColor="Transparent" />
 
-                <!-- Phone -->
-                <Entry
-          Text="062123456"
-          FontFamily="PoppinsRegular"
-          FontSize="14"
-          TextColor="Black"
-          BackgroundColor="Transparent" />
+                    <!-- Phone -->
+                    <Entry
+    x:Name="PhoneEntry"
+    Placeholder="Phone"
+    Text=""
+    Keyboard="Telephone"
+    FontFamily="PoppinsRegular"
+    FontSize="14"
+    TextColor="Black"
+    BackgroundColor="Transparent" />
+
 
             </VerticalStackLayout>
         </Frame>
