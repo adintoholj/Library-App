@@ -33,6 +33,11 @@ namespace BibliothequariaFrontend
                 c.BaseAddress = new Uri("http://localhost:5195/"); // same place you set MemberService
             });
 
+            //settings
+            builder.Services.AddSingleton<BibliothequariaFrontend.Services.ISettingsService,
+                              BibliothequariaFrontend.Services.SettingsService>();
+
+
             // Our API wrapper
             builder.Services.AddSingleton<MemberService>();
 #if DEBUG

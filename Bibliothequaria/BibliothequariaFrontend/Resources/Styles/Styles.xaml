@@ -24,6 +24,7 @@
     </Style>
 
     <Style TargetType="Button">
+         <!--extra 2-->
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource PrimaryDarkText}}" />
         <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}" />
         <Setter Property="FontFamily" Value="PoppinsRegular"/>
@@ -133,6 +134,7 @@
     </Style>
 
     <Style TargetType="Frame">
+        <!--extra 2-->
         <Setter Property="HasShadow" Value="False" />
         <Setter Property="BorderColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray950}}" />
         <Setter Property="CornerRadius" Value="8" />
@@ -162,6 +164,8 @@
     </Style>
 
     <Style TargetType="Label">
+
+         <!--dodano-->
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
         <Setter Property="BackgroundColor" Value="Transparent" />
         <Setter Property="FontFamily" Value="PoppinsRegular" />
@@ -423,5 +427,10 @@
         <Setter Property="UnselectedTabColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray950}}" />
         <Setter Property="SelectedTabColor" Value="{AppThemeBinding Light={StaticResource Gray950}, Dark={StaticResource Gray200}}" />
     </Style>
+
+    <!--added manually-->
+    
+
+    
 
 </ResourceDictionary>

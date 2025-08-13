@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:BibliothequariaFrontend.Controls"
     x:Class="BibliothequariaFrontend.Pages.ProfileInfo"
-    BackgroundColor="#4A4646"
+    BackgroundColor="{DynamicResource ContentBackground}"
     Shell.NavBarIsVisible="False"
     Padding="20">
 
@@ -49,8 +49,8 @@
       HorizontalOptions="Center">
             <Label.FormattedText>
                 <FormattedString>
-                    <Span Text="Customize " TextColor="#FDBF1D" />
-                    <Span Text="and edit your profile information" />
+                    <Span Text="Customize " TextColor="{DynamicResource ContentTextColor}" />
+                    <Span Text="and edit your profile information" TextColor="{DynamicResource ContentTextColor}"/>
                 </FormattedString>
             </Label.FormattedText>
         </Label>

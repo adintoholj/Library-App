@@ -12,6 +12,16 @@ namespace BibliothequariaFrontend
         {
             InitializeComponent();
 
+            var settings = ServiceHelper.GetRequiredService<BibliothequariaFrontend.Services.ISettingsService>();
+            settings.Initialize();
+
+            bool dark = Preferences.Default.Get("DarkMode", false);
+            var res = Application.Current.Resources;
+            res["ContentBackground"] = dark ? Color.FromArgb("#3B3838") : Colors.White;
+            res["ContentTextColor"] = dark ? Colors.White : Color.FromArgb("#1A1A1A");
+
+
+
             // 1) Catch non-UI (AppDomain) exceptions
             AppDomain.CurrentDomain.UnhandledException += (s, e) =>
             {

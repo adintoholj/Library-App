@@ -3,7 +3,7 @@
   xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
   x:Class="BibliothequariaFrontend.Pages.Settings"
-  BackgroundColor="#4A4646"
+  BackgroundColor="{DynamicResource ContentBackground}"
   Shell.NavBarIsVisible="False"
   Padding="0">
 
@@ -122,7 +122,7 @@
             Text="Settings"
             FontFamily="PoppinsBold"
             FontSize="24"
-            TextColor="White" />
+            TextColor="{DynamicResource ContentTextColor}" />
                 </StackLayout>
                 <Image
           Grid.Column="1"
@@ -142,17 +142,13 @@
         VerticalOptions="Center">
 
                 <!-- Dark mode -->
-                <Label
-          Grid.Row="0" Grid.Column="0"
-          Text="Dark mode"
-          FontFamily="PoppinsRegular"
-          FontSize="16"
-          TextColor="White"
-          VerticalOptions="Center" />
-                <Switch
-          Grid.Row="0" Grid.Column="1"
-          IsToggled="{Binding IsDarkMode}"
-          VerticalOptions="Center" />
+                <Grid ColumnDefinitions="*,auto" RowDefinitions="Auto" Margin="0,16,0,0">
+                    <Label Text="Dark mode" FontSize="18" VerticalOptions="Center" TextColor="{DynamicResource ContentTextColor}"/>
+                    <Switch x:Name="DarkModeSwitch"
+          Grid.Column="1"
+          VerticalOptions="Center"
+          Toggled="OnDarkModeToggled" />
+                </Grid>
 
                 <!-- Require password on startup -->
                 <Label
@@ -160,14 +156,14 @@
           Text="Require password on startup"
           FontFamily="PoppinsRegular"
           FontSize="16"
-          TextColor="White"
-          VerticalOptions="Center" />
+          TextColor="{DynamicResource ContentTextColor}"
+          VerticalOptions="Center"/>
                 <Switch
           Grid.Row="1" Grid.Column="1"
           IsToggled="{Binding RequirePasswordOnStartup}"
           VerticalOptions="Center" />
 
-                <!-- Notifications -->
+                <!-- Notifications //FOR NOW NOT INCLUDED
                 <Label
           Grid.Row="2" Grid.Column="0"
           Text="Notifications"
@@ -178,9 +174,9 @@
                 <Switch
           Grid.Row="2" Grid.Column="1"
           IsToggled="{Binding EnableNotifications}"
-          VerticalOptions="Center" />
+          VerticalOptions="Center" /> -->
 
-                <!-- Theme accent -->
+                <!-- Theme accent //FOR NOW NOT INCLUDED
                 <Label
           Grid.Row="3" Grid.Column="0"
           Text="Theme accent"
@@ -188,13 +184,19 @@
           FontSize="16"
           TextColor="White"
           VerticalOptions="Center" />
-                <Picker
-          Grid.Row="3" Grid.Column="1"
-          ItemsSource="{Binding AccentOptions}"
-          SelectedItem="{Binding SelectedAccent}"
-          WidthRequest="150"
-          VerticalOptions="Center" />
-            </Grid>
+                <Picker x:Name="AccentPicker"
+        Title="Choose…"
+        SelectedIndexChanged="OnAccentChanged"
+        WidthRequest="220"
+                        Grid.Row="3" Grid.Column="1">
+                    <Picker.Items>
+                        <x:String>Amber</x:String>
+                        <x:String>Teal</x:String>
+                        <x:String>Purple</x:String>
+                        <x:String>Default</x:String>
+                    </Picker.Items>
+                </Picker> -->
+            </Grid> 
 
             <!-- Spacer row if needed -->
             <BoxView Grid.Row="2" HeightRequest="20" Color="Transparent" />

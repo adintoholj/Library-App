@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:controls="clr-namespace:BibliothequariaFrontend.Controls"
     x:Class="BibliothequariaFrontend.Pages.BookOperations"
-    BackgroundColor="#4A4646"
+    BackgroundColor="{DynamicResource ContentBackground}"
     Shell.NavBarIsVisible="False"
     Padding="0">
 
@@ -82,9 +82,9 @@
             <!-- Header -->
             <Grid Grid.Row="0" ColumnDefinitions="*,Auto">
                 <StackLayout Spacing="5">
-                    <Label Text="Book operations" FontFamily="PoppinsBold" FontSize="24" TextColor="White" />
+                    <Label Text="Book operations" FontFamily="PoppinsBold" FontSize="24" TextColor="{DynamicResource ContentTextColor}" />
                     <Label Text="In here, you can add new books, see which ones have been borrowed and which ones are currently available"
-                           FontFamily="PoppinsRegular" FontSize="16" TextColor="White" LineBreakMode="WordWrap" />
+                           FontFamily="PoppinsRegular" FontSize="16" TextColor="{DynamicResource ContentTextColor}" LineBreakMode="WordWrap" />
                 </StackLayout>
                 <Image Source="pfp.png" HeightRequest="50" WidthRequest="50" HorizontalOptions="End" VerticalOptions="Center">
                     <Image.GestureRecognizers>

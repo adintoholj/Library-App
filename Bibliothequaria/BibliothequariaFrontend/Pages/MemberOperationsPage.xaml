@@ -4,7 +4,7 @@
   xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
   xmlns:controls="clr-namespace:BibliothequariaFrontend.Controls"
   x:Class="BibliothequariaFrontend.Pages.MemberOperationsPage"
-  BackgroundColor="#4A4646"
+  BackgroundColor="{DynamicResource ContentBackground}"
   Shell.NavBarIsVisible="False"
   Padding="0">
 
@@ -142,12 +142,12 @@
             Text="Member operations"
             FontFamily="PoppinsBold"
             FontSize="24"
-            TextColor="White" />
+            TextColor="{DynamicResource ContentTextColor}" />
                     <Label
             Text="In here, you can add new users or change the status of an existing user"
             FontFamily="PoppinsRegular"
             FontSize="16"
-            TextColor="White"
+            TextColor="{DynamicResource ContentTextColor}"
             LineBreakMode="WordWrap" />
                 </StackLayout>
 
